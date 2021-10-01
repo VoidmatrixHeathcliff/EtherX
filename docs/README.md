@@ -1,7 +1,6 @@
 # EtherX 完全参考手册
 
-在这里您可以找到关于 EtherX 的一切，但是在查阅此文档之前，我们建议您先阅读 [快速上手文档](quick-start.md)
-
+在这里您可以找到关于 EtherX 的一切，但是在查阅此文档之前，我们建议您先阅读 [快速上手文档](quick-start.md)  
 如果您在阅读期间发现有任何错误或建议，欢迎 [提交 issue](https://github.com/VoidmatrixHeathcliff/EtherX/issues) 或发送邮件至： Voidmatrix@qq.com
 
 ## 快速索引
