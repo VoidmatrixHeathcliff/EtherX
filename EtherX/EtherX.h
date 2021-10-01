@@ -8,7 +8,8 @@
 * Version:	202110.0.1
 * Author:	Voidmatrix
 * Email:	Voidmatrix@qq.com
-* Document:	https://github.com/EtherProject/EtherX
+* Document:	https://github.com/VoidmatrixHeathcliff/EtherX
+*			https://gitee.com/Voidmatrix/EtherX
 * 
 *****************************/
 
