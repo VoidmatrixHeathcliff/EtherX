@@ -1,6 +1,8 @@
 #ifndef _ETHERX_H_
 #define _ETHERX_H_
 
+#define ETHERX_IMPLEMENTATION
+
 /*****************************
 * 
 * EtherX - 基于 SDL2 的 EasyX 开源跨平台全套解决方案
@@ -334,6 +336,7 @@ ETHX_API void ETHX_SetFontStyle(ETHX_Font* font, ETHX_FontStyle style);
 ETHX_API int ETHX_GetFontStyle(ETHX_Font* font);
 ETHX_API void ETHX_GetTextSize(ETHX_Font* font, const std::string& text, int& width, int& height);
 ETHX_API void ETHX_DrawText(ETHX_Font* font, const std::string& text, const ETHX_Point& pos);
+ETHX_API void ETHX_DrawText(ETHX_Font* font, const std::string& text, const ETHX_Rect& show_rect);
 ETHX_API ETHX_Sprite* ETHX_CreateTextSprite(ETHX_Font* font, const std::string& text);
 
 // Media API
