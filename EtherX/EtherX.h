@@ -1,7 +1,16 @@
 #ifndef _ETHERX_H_
 #define _ETHERX_H_
 
-#define ETHERX_IMPLEMENTATION
+/*****************************
+* 
+* EtherX - 基于 SDL2 的 EasyX 开源跨平台全套解决方案
+* 
+* Version:	202110.0.1
+* Author:	Voidmatrix
+* Email:	Voidmatrix@qq.com
+* Document:	https://github.com/EtherProject/EtherX
+* 
+*****************************/
 
 #ifndef __cplusplus
 #error ETHERX IS ONLY FOR C++
@@ -47,7 +56,207 @@ enum ETHX_FontStyle
 	ETHX_FONT_BOLD = 0x01,
 	ETHX_FONT_ITALIC = 0x02,
 	ETHX_FONT_UNDERLINE = 0x04,
-	ETHX_FONT_STRIKETHROUGH = 0x08
+	ETHX_FONT_STRIKETHROUGH = 0x08,
+};
+
+enum ETHX_EventType
+{
+	// Window Event
+	ETHX_ET_WINDOWSHOWN = 1,
+	ETHX_ET_WINDOWHIDDEN = 2,
+	ETHX_ET_WINDOWEXPOSED = 3,
+	ETHX_ET_WINDOWMOVED = 4,
+	ETHX_ET_WINDOWRESIZED = 5,
+	ETHX_ET_WINDOWMINIMIZED = 7,
+	ETHX_ET_WINDOWMAXIMIZED = 8,
+	ETHX_ET_WINDOWENTER = 10,
+	ETHX_ET_WINDOWLEAVE = 11,
+	ETHX_ET_WINDOWFOCUS_GET = 12,
+	ETHX_ET_WINDOWFOCUS_LOST = 13,
+	ETHX_ET_WINDOWCLOSE = 14,
+
+	// Key Event
+	ETHX_ET_KEYDOWN = 768,
+	ETHX_ET_KEYUP = 769,
+
+	// Mouse Event
+	ETHX_ET_MOUSEMOTION = 1024,
+	ETHX_ET_MOUSEDOWN = 1025,
+	ETHX_ET_MOUSEUP = 1026,
+	ETHX_ET_MOUSESCROLL = 1027,
+
+	// TextInput Event
+	ETHX_ET_TEXTINPUT = 771,
+
+	// Other Event
+	ETHX_ET_QUIT = 256,
+};
+
+enum ETHX_KeyCode
+{
+	ETHX_KC_0 = 48,
+	ETHX_KC_1,
+	ETHX_KC_2,
+	ETHX_KC_3,
+	ETHX_KC_4,
+	ETHX_KC_5,
+	ETHX_KC_6,
+	ETHX_KC_7,
+	ETHX_KC_8,
+	ETHX_KC_9,
+	ETHX_KCP_0 = 1073741922,
+	ETHX_KCP_00 = 1073742000,
+	ETHX_KCP_000 = 1073742001,
+	ETHX_KCP_1 = 1073741913,
+	ETHX_KCP_2,
+	ETHX_KCP_3,
+	ETHX_KCP_4,
+	ETHX_KCP_5,
+	ETHX_KCP_6,
+	ETHX_KCP_7,
+	ETHX_KCP_8,
+	ETHX_KCP_9,
+	ETHX_KC_F1 = 1073741882,
+	ETHX_KC_F2,
+	ETHX_KC_F3,
+	ETHX_KC_F4,
+	ETHX_KC_F5,
+	ETHX_KC_F6,
+	ETHX_KC_F7,
+	ETHX_KC_F8,
+	ETHX_KC_F9,
+	ETHX_KC_F10,
+	ETHX_KC_F11,
+	ETHX_KC_F12,
+	ETHX_KC_F13 = 1073741928,
+	ETHX_KC_F14,
+	ETHX_KC_F15,
+	ETHX_KC_F16,
+	ETHX_KC_F17,
+	ETHX_KC_F18,
+	ETHX_KC_F19,
+	ETHX_KC_F20,
+	ETHX_KC_F21,
+	ETHX_KC_F22,
+	ETHX_KC_F23,
+	ETHX_KC_F24,
+	ETHX_KC_A = 97,
+	ETHX_KC_B,
+	ETHX_KC_C,
+	ETHX_KC_D,
+	ETHX_KC_E,
+	ETHX_KC_F,
+	ETHX_KC_G,
+	ETHX_KC_H,
+	ETHX_KC_I,
+	ETHX_KC_J,
+	ETHX_KC_K,
+	ETHX_KC_L,
+	ETHX_KC_M,
+	ETHX_KC_N,
+	ETHX_KC_O,
+	ETHX_KC_P,
+	ETHX_KC_Q,
+	ETHX_KC_R,
+	ETHX_KC_S,
+	ETHX_KC_T,
+	ETHX_KC_U,
+	ETHX_KC_V,
+	ETHX_KC_W,
+	ETHX_KC_X,
+	ETHX_KC_Y,
+	ETHX_KC_Z,
+	ETHX_KCP_A = 1073742012,
+	ETHX_KCP_B,
+	ETHX_KCP_C,
+	ETHX_KCP_D,
+	ETHX_KCP_E,
+	ETHX_KCP_F,
+	ETHX_KC_ESC = 27,
+	ETHX_KC_ENTER = 13,
+	ETHX_KCP_ENTER = 1073741912,
+	ETHX_KC_BACKSPACE = 8,
+	ETHX_KCP_BACKSPACE = 1073742011,
+	ETHX_KC_RIGHT = 1073741903,
+	ETHX_KC_LEFT,
+	ETHX_KC_DOWN,
+	ETHX_KC_UP,
+	ETHX_KC_INSERT = 1073741897,
+	ETHX_KC_DELETE = 127,
+	ETHX_KC_HOME = 1073741898,
+	ETHX_KC_END = 1073741901,
+	ETHX_KC_PAGEUP = 1073741899,
+	ETHX_KC_PAGEDOWN = 1073741902,
+	ETHX_KC_LEFTCTRL = 1073742048,
+	ETHX_KC_LEFTGUI = 1073742051,
+	ETHX_KC_LEFTALT = 1073742050,
+	ETHX_KC_LEFTSHIFT = 1073742049,
+	ETHX_KC_RIGHTCTRL = 1073742052,
+	ETHX_KC_RIGHTGUI = 1073742055,
+	ETHX_KC_RIGHTALT = 1073742054,
+	ETHX_KC_RIGHTSHIFT = 1073742053,
+	ETHX_KC_SPACE = 32,
+	ETHX_KC_TAB = 9,
+	ETHX_KC_KP_TAB = 1073742010,
+	ETHX_KC_CAPSLOCK = 1073741881,
+	ETHX_KC_NUMLOCK = 1073741907,
+	ETHX_KC_PRINTSCREEN = 1073741894,
+	ETHX_KC_SCROLLLOCK = 1073741895,
+	ETHX_KC_PAUSE = 1073741896,
+	ETHX_KC_AUDIOMUTE = 1073742086,
+	ETHX_KC_AUDIOPREV = 1073742083,
+	ETHX_KC_AUDIONEXT = 1073742082,
+	ETHX_KC_AUDIOPLAY = 1073742085,
+	ETHX_KC_AUDIOSTOP = 1073742084,
+	ETHX_KC_VOLUMEUP = 1073741952,
+	ETHX_KC_VOLUMEDOWN = 1073741953,
+	ETHX_KC_BRIGHTNESSUP = 1073742100,
+	ETHX_KC_BRIGHTNESSDOWN = 1073742099,
+	ETHX_KC_BACKQUOTE = 96,
+	ETHX_KC_EXCLAIM = 33,
+	ETHX_KC_KP_EXCLAM = 1073742031,
+	ETHX_KC_AT = 64,
+	ETHX_KC_KP_AT = 1073742030,
+	ETHX_KC_HASH = 35,
+	ETHX_KC_KP_HASH = 1073742028,
+	ETHX_KC_DOLLAR = 36,
+	ETHX_KC_CARET = 94,
+	ETHX_KCP_POWER = 1073742019,
+	ETHX_KC_AMPERSAND = 38,
+	ETHX_KCP_AMPERSAND = 1073742023,
+	ETHX_KCP_DBLAMPERSAND = 1073742024,
+	ETHX_KC_ASTERISK = 42,
+	ETHX_KCP_ASTERISK = 1073741909,
+	ETHX_KC_LEFTPAREN = 40,
+	ETHX_KCP_LEFTPAREN = 1073742006,
+	ETHX_KC_RIGHTPAREN = 41,
+	ETHX_KCP_RIGHTPAREN = 1073742007,
+	ETHX_KC_MINUS = 45,
+	ETHX_KCP_MINUS = 1073741910,
+	ETHX_KC_UNDERSCORE = 95,
+	ETHX_KC_PLUS = 43,
+	ETHX_KCP_PLUS = 1073741911,
+	ETHX_KC_EQUALS = 61,
+	ETHX_KCP_EQUALS = 1073741927,
+	ETHX_KC_LEFTBRACKET = 91,
+	ETHX_KC_RIGHTBRACKET = 93,
+	ETHX_KCP_LEFTBRACE = 1073742008,
+	ETHX_KCP_RIGHTBRACE = 1073742009,
+	ETHX_KC_COLON = 58,
+	ETHX_KC_SEMICOLON = 59,
+	ETHX_KC_BACKSLASH = 92,
+	ETHX_KC_QUOTE = 39,
+	ETHX_KC_QUOTEDBL = 34,
+	ETHX_KC_LESS = 60,
+	ETHX_KC_GREATER = 62,
+	ETHX_KC_COMMA = 44,
+	ETHX_KC_PERIOD = 46,
+	ETHX_KC_QUESTION = 63,
+	ETHX_KC_SLASH = 47,
+	ETHX_KCP_VERTICALBAR = 1073742025,
+	ETHX_KCP_DBLVERTICALBAR = 1073742026,
+	ETHX_KC_WWW = 1073742088,
+	ETHX_KC_MAIL = 1073742089,
 };
 
 struct ETHX_Color
@@ -70,10 +279,21 @@ struct ETHX_Point
 	int y;
 };
 
+struct ETHX_Event
+{
+	ETHX_EventType	type;
+	ETHX_KeyCode	key_code;
+	int				mouse_pos_x, mouse_pos_y;
+	int				mouse_scroll_x, mouse_scroll_y;
+	std::string		text;
+};
+
 // Window API
 ETHX_API void ETHX_InitWindow(const std::string& title, int width, int height, ETHX_WindowStyle style);
 ETHX_API void ETHX_QuitWindow();
 ETHX_API void ETHX_ShowMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style);
+bool ETHX_ShowConfirmMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style,
+	const std::string& ok_text = "OK", const std::string& cancel_text = "Cancel");
 ETHX_API void ETHX_SetWindowTitle(std::string title);
 ETHX_API std::string ETHX_GetWindowTitle();
 ETHX_API void ETHX_SetWindowFullscreen(bool flag);
@@ -103,8 +323,8 @@ ETHX_API void ETHX_DrawLine(const ETHX_Point& begin, const ETHX_Point& end, Uint
 ETHX_API void ETHX_DrawRectangle(const ETHX_Rect& rect, bool fill = false);
 ETHX_API void ETHX_DrawRectangle(const ETHX_Rect& rect, int radius, bool fill = false);
 ETHX_API void ETHX_DrawCircle(const ETHX_Point& center, int radius, bool fill = false);
-ETHX_API void ETHX_DrawCircle(const ETHX_Point& center, int radius_x, int radius_y, bool fill = false);
-ETHX_API void ETHX_DrawCircle(const ETHX_Point& center, int radius, int start_angle, int end_angle, bool fill = false);
+ETHX_API void ETHX_DrawEllipse(const ETHX_Point& center, int radius_x, int radius_y, bool fill = false);
+ETHX_API void ETHX_DrawPie(const ETHX_Point& center, int radius, int start_angle, int end_angle, bool fill = false);
 ETHX_API void ETHX_DrawTriangle(const ETHX_Point& point_1, const ETHX_Point& point_2, const ETHX_Point& point_3, bool fill = false);
 ETHX_API ETHX_Font* ETHX_LoadFont(const std::string& path, int ptsize);
 ETHX_API ETHX_Font* ETHX_LoadFont(void* data, size_t size, int ptsize);
@@ -129,6 +349,9 @@ ETHX_API void ETHX_PlaySound(ETHX_Sound* sound, int loops);
 ETHX_API void ETHX_SetSoundVolume(ETHX_Sound* sound, int volume);
 ETHX_API int ETHX_GetSoundVolume(ETHX_Sound* sound);
 
+// Interactivity API
+const ETHX_Event* const ETHX_UpdateEvent();
+
 #ifdef ETHERX_IMPLEMENTATION
 
 #include <SDL.h>
@@ -136,54 +359,6 @@ ETHX_API int ETHX_GetSoundVolume(ETHX_Sound* sound);
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <SDL2_gfxPrimitives.h>
-
-// Win32 API
-#pragma comment(lib, "Setupapi.lib")
-#pragma comment(lib, "Winmm.lib")
-#pragma comment(lib, "Imm32.lib")
-#pragma comment(lib, "Version.lib")
-
-// SDL2
-#pragma comment(lib, "lib/SDL2/SDL2.lib")
-#pragma comment(lib, "lib/SDL2/SDL2main.lib")
-
-// SDL2_image
-#pragma comment(lib, "lib/SDL2_image/SDL2_image.lib")
-#pragma comment(lib, "lib/SDL2_image/jpeg.lib")
-#pragma comment(lib, "lib/SDL2_image/libpng16.lib")
-#pragma comment(lib, "lib/SDL2_image/libwebpmux.lib")
-#pragma comment(lib, "lib/SDL2_image/tiff.lib")
-#pragma comment(lib, "lib/SDL2_image/tiffxx.lib")
-#pragma comment(lib, "lib/SDL2_image/turbojpeg.lib")
-#pragma comment(lib, "lib/SDL2_image/webp.lib")
-#pragma comment(lib, "lib/SDL2_image/webpdecoder.lib")
-#pragma comment(lib, "lib/SDL2_image/webpdemux.lib")
-#pragma comment(lib, "lib/SDL2_image/zlib.lib")
-#pragma comment(lib, "lib/SDL2_image/lzma.lib")
-
-// SDL2_mixer
-#pragma comment(lib, "lib/SDL2_mixer/SDL2_mixer.lib")
-#pragma comment(lib, "lib/SDL2_mixer/FLAC.lib")
-#pragma comment(lib, "lib/SDL2_mixer/FLAC++.lib")
-#pragma comment(lib, "lib/SDL2_mixer/libmpg123.lib")
-#pragma comment(lib, "lib/SDL2_mixer/ogg.lib")
-#pragma comment(lib, "lib/SDL2_mixer/opus.lib")
-#pragma comment(lib, "lib/SDL2_mixer/opusfile.lib")
-#pragma comment(lib, "lib/SDL2_mixer/vorbis.lib")
-#pragma comment(lib, "lib/SDL2_mixer/vorbisenc.lib")
-#pragma comment(lib, "lib/SDL2_mixer/vorbisfile.lib")
-
-// SDL2_ttf
-#pragma comment(lib, "lib/SDL2_ttf/SDL2_ttf.lib")
-#pragma comment(lib, "lib/SDL2_ttf/brotlicommon-static.lib")
-#pragma comment(lib, "lib/SDL2_ttf/brotlidec-static.lib")
-#pragma comment(lib, "lib/SDL2_ttf/brotlienc-static.lib")
-#pragma comment(lib, "lib/SDL2_ttf/bz2.lib")
-#pragma comment(lib, "lib/SDL2_ttf/freetype.lib")
-#pragma comment(lib, "lib/SDL2_ttf/zlib.lib")
-
-// SDL2_gfx
-#pragma comment(lib, "lib/SDL2_gfx/SDL2_gfx.lib")
 
 struct ETHX_Spirit
 {
@@ -225,6 +400,7 @@ struct ETHX_Sound
 
 SDL_Window* _pWindow = nullptr;
 SDL_Renderer* _pWRenderer = nullptr;
+ETHX_Event* _pEvent = nullptr;
 
 /*
 * *****************************************
@@ -247,7 +423,13 @@ void ETHX_InitWindow(const std::string& title, int width, int height, ETHX_Windo
 	_pWindow = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, style);
 	_pWRenderer = SDL_CreateRenderer(_pWindow, -1, SDL_RENDERER_ACCELERATED);
 
+#ifdef __WINDOWS__
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
+#else
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+#endif	// !__WINDOWS__
+
+	SDL_StartTextInput();
 }
 
 void ETHX_QuitWindow()
@@ -265,6 +447,34 @@ void ETHX_QuitWindow()
 void ETHX_ShowMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style)
 {
 	SDL_ShowSimpleMessageBox(style, title.c_str(), msg.c_str(), _pWindow);
+}
+
+bool ETHX_ShowConfirmMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style,
+	const std::string& ok_text, const std::string& cancel_text)
+{
+	const SDL_MessageBoxButtonData _data_button[2] = {
+		{ SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT, 1, ok_text.c_str() },
+		{ SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT, 2, cancel_text.c_str() },
+	};
+	const SDL_MessageBoxColorScheme _color_scheme = {
+		{
+			{ 255, 0, 0 },
+			{ 0, 255, 0 },
+			{ 255, 255, 0 },
+			{ 0, 0, 255 },
+			{ 255, 0, 255 }
+		}
+	};
+	const SDL_MessageBoxData _data_message_box = {
+		style, 
+		_pWindow, title.c_str(), msg.c_str(),
+		2, _data_button, & _color_scheme
+	};
+
+	int _id_button = 0;
+	SDL_ShowMessageBox(&_data_message_box, &_id_button);
+
+	return _id_button;
 }
 
 void ETHX_SetWindowTitle(const std::string& title)
@@ -365,6 +575,8 @@ ETHX_Spirit* ETHX_LoadSpirit(void* data, size_t size)
 
 inline bool _check_spirit_is_valid(ETHX_Spirit* spirit)
 {
+	// maybe assert something here
+
 	return spirit;
 }
 
@@ -489,7 +701,7 @@ void ETHX_DrawCircle(const ETHX_Point& center, int radius, bool fill)
 			radius, _color.r, _color.g, _color.b, _color.a);
 }
 
-void ETHX_DrawCircle(const ETHX_Point& center, int radius_x, int radius_y, bool fill)
+void ETHX_DrawEllipse(const ETHX_Point& center, int radius_x, int radius_y, bool fill)
 {
 	ETHX_Color _color;
 	SDL_GetRenderDrawColor(_pWRenderer, &(_color.r), &(_color.g), &(_color.b), &(_color.a));
@@ -499,7 +711,7 @@ void ETHX_DrawCircle(const ETHX_Point& center, int radius_x, int radius_y, bool 
 			radius_x, radius_y, _color.r, _color.g, _color.b, _color.a);
 }
 
-void ETHX_DrawCircle(const ETHX_Point& center, int radius, int start_angle, int end_angle, bool fill)
+void ETHX_DrawPie(const ETHX_Point& center, int radius, int start_angle, int end_angle, bool fill)
 {
 	ETHX_Color _color;
 	SDL_GetRenderDrawColor(_pWRenderer, &(_color.r), &(_color.g), &(_color.b), &(_color.a));
@@ -547,6 +759,8 @@ ETHX_Font* ETHX_LoadFont(void* data, size_t size, int ptsize)
 
 inline bool _check_font_is_valid(ETHX_Font* font)
 {
+	// maybe assert something here
+
 	return font;
 }
 
@@ -648,6 +862,8 @@ ETHX_Music* ETHX_LoadMusic(const std::string& path)
 
 inline bool _check_music_is_valid(ETHX_Music* music)
 {
+	// maybe assert something here
+
 	return music;
 }
 
@@ -717,6 +933,8 @@ ETHX_Sound* ETHX_LoadSound(void* data, size_t size)
 
 inline bool _check_sound_is_valid(ETHX_Sound* sound)
 {
+	// maybe assert something here
+
 	return sound;
 }
 
@@ -739,6 +957,55 @@ int ETHX_GetSoundVolume(ETHX_Sound* sound)
 	if (!_check_sound_is_valid(sound)) return 0;
 
 	return sound->_pSound->volume;
+}
+
+/*
+* *****************************************
+*
+* Interactivity API Implementation
+*
+* *****************************************
+*/
+
+const ETHX_Event* const ETHX_UpdateEvent()
+{
+	SDL_Event _event;
+
+	if (!SDL_PollEvent(&_event)) return nullptr;
+
+	delete _pEvent; _pEvent = new ETHX_Event();
+
+	switch (_event.type)
+	{
+	case SDL_QUIT:
+		_pEvent->type = ETHX_ET_QUIT;
+		break;
+	case SDL_MOUSEMOTION:
+		_pEvent->type = ETHX_ET_MOUSEMOTION;
+		_pEvent->mouse_pos_x = _event.motion.x;
+		_pEvent->mouse_pos_y = _event.motion.y;
+		break;
+	case SDL_MOUSEWHEEL:
+		_pEvent->type = ETHX_ET_MOUSESCROLL;
+		_pEvent->mouse_scroll_x = _event.wheel.x;
+		_pEvent->mouse_scroll_y = _event.wheel.y;
+		break;
+	case SDL_TEXTINPUT:
+		_pEvent->type = ETHX_ET_TEXTINPUT;
+		_pEvent->text = _event.text.text;
+		break;
+	case SDL_WINDOWEVENT:
+		_pEvent->type = (ETHX_EventType)_event.window.event;
+		break;
+	case SDL_KEYDOWN:
+		_pEvent->type = ETHX_ET_KEYDOWN;
+		_pEvent->key_code = (ETHX_KeyCode)_event.key.keysym.sym;
+		break;
+	default:
+		break;
+	}
+
+	return _pEvent;
 }
 
 #endif	// ETHERX_IMPLEMENTATION
