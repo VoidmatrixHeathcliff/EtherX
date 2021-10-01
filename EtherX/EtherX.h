@@ -22,6 +22,7 @@
 #include <string>
 
 typedef uint8_t Uint8;
+typedef uint32_t Uint32;
 
 typedef struct ETHX_Spirit ETHX_Spirit;
 typedef struct ETHX_Font ETHX_Font;
@@ -351,7 +352,11 @@ ETHX_API void ETHX_SetSoundVolume(ETHX_Sound* sound, int volume);
 ETHX_API int ETHX_GetSoundVolume(ETHX_Sound* sound);
 
 // Interactivity API
-const ETHX_Event* const ETHX_UpdateEvent();
+ETHX_API const ETHX_Event* const ETHX_UpdateEvent();
+
+// Other API
+
+ETHX_API void ETHX_Sleep(Uint32 ms);
 
 #ifdef ETHERX_IMPLEMENTATION
 
@@ -1007,6 +1012,19 @@ const ETHX_Event* const ETHX_UpdateEvent()
 	}
 
 	return _pEvent;
+}
+
+/*
+* *****************************************
+*
+* Other API Implementation
+*
+* *****************************************
+*/
+
+void ETHX_Sleep(Uint32 ms)
+{
+	SDL_Delay(ms);
 }
 
 #endif	// ETHERX_IMPLEMENTATION
