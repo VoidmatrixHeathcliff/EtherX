@@ -2,9 +2,7 @@
 
 EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ 游戏开发工具库
 
-> 本项目命名灵感来自 EasyX，但由于 EasyX 至今尚未开源，且其过度依赖 Windows 编程模型，考虑到部分开发者的诉求，EtherX 希望在一定程度上成为 EasyX 的替代解决方案。  
->
-> 注意：虽然命名十分相像，但本项目与 [EtherEngineX](https://github.com/EtherProject/EtherEngineX) 或 [EtherEngine](https://github.com/EtherProject/EtherEngine) 均没有直接联系！ 
+> 本项目命名灵感来自 EasyX，但由于 EasyX 至今尚未开源，且其过度依赖 Windows 编程模型，考虑到部分开发者的诉求，EtherX 希望在一定程度上成为 EasyX 的替代解决方案。需要注意的是，虽然命名十分相像，但本项目与 [EtherEngineX](https://github.com/EtherProject/EtherEngineX) 或 [EtherEngine](https://github.com/EtherProject/EtherEngine) 均没有直接联系！ 
 
 ## 本项目特点及预期功能
 
