@@ -8,40 +8,43 @@
 <details>
     <summary>💼 结构体和枚举</summary>
 
-+ [struct ETHX_Color](#ETHX_Color)
-+ [struct ETHX_Rect](#ETHX_Rect)
-+ [struct ETHX_Point](#ETHX_Point)
-+ [struct ETHX_Event](#ETHX_Event)
-+ [struct ETHX_Image](#ETHX_Image)
-+ [struct ETHX_Font](#ETHX_Font)
-+ [struct ETHX_Music](#ETHX_Music)
-+ [struct ETHX_Sound](#ETHX_Sound)
-+ [enum ETHX_MessageBoxStyle](#ETHX_MessageBoxStyle)
-+ [enum ETHX_WindowStyle](#ETHX_WindowStyle)
-+ [enum ETHX_ImageStyle](#ETHX_ImageStyle)
-+ [enum ETHX_FontStyle](#ETHX_FontStyle)
-+ [enum ETHX_EventType](#ETHX_EventType)
-+ [enum ETHX_KeyCode](#ETHX_KeyCode)
+| 结构体和枚举                                       | 简介                     |
+|:---------------------------------------------------|:-------------------------|
+| [struct ETHX_Color](#ETHX_Color)                   | 用以描述 EtherX 中的颜色 |
+| [struct ETHX_Rect](#ETHX_Rect)                     | 用以描述矩形位置和大小   |
+| [struct ETHX_Point](#ETHX_Point)                   | 用以描述点的位置         |
+| [struct ETHX_Event](#ETHX_Event)                   | 用以描述交互事件         |
+| [struct ETHX_Image](#ETHX_Image)                   | 用以描述图像对象         |
+| [struct ETHX_Font](#ETHX_Font)                     | 用以描述字体对象         |
+| [struct ETHX_Music](#ETHX_Music)                   | 用以描述音乐对象         |
+| [struct ETHX_Sound](#ETHX_Sound)                   | 用以描述音效对象         |
+| [enum ETHX_MessageBoxStyle](#ETHX_MessageBoxStyle) | 用以描述消息提示框样式   |
+| [enum ETHX_WindowStyle](#ETHX_WindowStyle)         | 用以描述窗口样式         |
+| [enum ETHX_ImageStyle](#ETHX_ImageStyle)           | 以描述图片对象翻转样式   |
+| [enum ETHX_FontStyle](#ETHX_FontStyle)             | 用以描述字体样式         |
+| [enum ETHX_EventType](#ETHX_EventType)             | 用以描述事件类型         |
+| [enum ETHX_KeyCode](#ETHX_KeyCode)                 | 用以描述键盘按键键码     |
     
 </details>
 
 <details>
     <summary>🖥 窗口控制相关函数</summary>
 
-+ [ETHX_InitWindow()](#ETHX_InitWindow)
-+ [ETHX_QuitWindow()](#ETHX_QuitWindow)
-+ [ETHX_ShowMessageBox()](#ETHX_ShowMessageBox)
-+ [ETHX_ShowConfirmMessageBox()](#ETHX_ShowConfirmMessageBox)
-+ [ETHX_SetWindowTitle()](#ETHX_SetWindowTitle)
-+ [ETHX_GetWindowTitle()](#ETHX_GetWindowTitle)
-+ [ETHX_SetWindowFullscreen()](#ETHX_SetWindowFullscreen)
-+ [ETHX_SetWindowSize()](#ETHX_SetWindowSize)
-+ [ETHX_GetWindowSize()](#ETHX_GetWindowSize)
-+ [ETHX_GetWindowSize_HDPI()](#ETHX_GetWindowSize_HDPI)
-+ [ETHX_SetWindowIcon()](#ETHX_SetWindowIcon)
-+ [ETHX_SetWindowIcon()](#ETHX_SetWindowIcon)
-+ [ETHX_ClearWindow()](#ETHX_ClearWindow)
-+ [ETHX_UpdateWindow()](#ETHX_UpdateWindow)
+| 函数名                                                      | 简介                     |
+|:------------------------------------------------------------|:-------------------------|
+| [ETHX_InitWindow()](#ETHX_InitWindow)                       | 用以描述 EtherX 中的颜色 |
+| [ETHX_QuitWindow()](#ETHX_QuitWindow)                       | 用以描述矩形位置和大小   |
+| [ETHX_ShowMessageBox()](#ETHX_ShowMessageBox)               | 用以描述点的位置         |
+| [ETHX_ShowConfirmMessageBox()](#ETHX_ShowConfirmMessageBox) | 用以描述交互事件         |
+| [ETHX_SetWindowTitle()](#ETHX_SetWindowTitle)               | 用以描述图像对象         |
+| [ETHX_GetWindowTitle()](#ETHX_GetWindowTitle)               | 用以描述字体对象         |
+| [ETHX_SetWindowFullscreen()](#ETHX_SetWindowFullscreen)     | 用以描述音乐对象         |
+| [ETHX_SetWindowSize()](#ETHX_SetWindowSize)                 | 用以描述音效对象         |
+| [ETHX_GetWindowSize()](#ETHX_GetWindowSize)                 | 用以描述消息提示框样式   |
+| [ETHX_GetWindowSize_HDPI()](#ETHX_GetWindowSize_HDPI)       | 用以描述窗口样式         |
+| [ETHX_SetWindowIcon()](#ETHX_SetWindowIcon)                 | 以描述图片对象翻转样式   |
+| [ETHX_ClearWindow()](#ETHX_ClearWindow)                     | 用以描述字体样式         |
+| [ETHX_UpdateWindow()](#ETHX_UpdateWindow)                   | 用以描述事件类型         |
 
 </details>
 
@@ -186,7 +189,7 @@
 
 <a id="ETHX_MessageBoxStyle"></a>
 ### enum ETHX_MessageBoxStyle
-+ **功能：** 用以描述消息提示框类型
++ **功能：** 用以描述消息提示框样式
 + **成员及简介：**
     | 成员                  | 简介                     |
     |:----------------------|:-------------------------|
@@ -201,7 +204,7 @@
 
 <a id="ETHX_WindowStyle"></a>
 ### enum ETHX_WindowStyle
-+ **功能：** 用以描述窗口类型
++ **功能：** 用以描述窗口样式
 + **成员及简介：**
     | 成员                     | 简介           |
     |:-------------------------|:---------------|
@@ -218,7 +221,7 @@
 
 <a id="ETHX_ImageStyle"></a>
 ### enum ETHX_ImageStyle
-+ **功能：** 用以描述图片对象翻转类型
++ **功能：** 用以描述图片对象翻转样式
 + **成员及简介：**
     | 成员                   | 简介         |
     |:-----------------------|:-------------|
@@ -432,8 +435,7 @@ ETHX_InitWindow 用以初始化 EtherX 内部组件，必须在调用其他 Ethe
 + **功能：** 显示信息提示确认窗口
 + **函数原型：**
     ```c++
-        bool ETHX_ShowConfirmMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style,
-	const std::string& ok_text = "OK", const std::string& cancel_text = "Cancel");
+    bool ETHX_ShowConfirmMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style, std::string& ok_text = "OK", const std::string& cancel_text = "Cancel");
     ```
 + **参数简介：** 
     | 参数          | 简介           |
@@ -446,12 +448,30 @@ ETHX_InitWindow 用以初始化 EtherX 内部组件，必须在调用其他 Ethe
 + **返回值简介：** 用户点击确认按钮返回 `true`，反之返回 `false`
 + **代码示例：**
     ```c++
-        // 如果用户点击确认按钮输出 Yes，反之输出 No
-        if (ETHX_ShowConfirmMessageBox("Question", "Are you OK ?", ETHX_MSGBOX_WARNING))
-            std::cout << "Yes" << std::endl;
-        else
-            std::cout << "No" << std::endl;
+    // 如果用户点击确认按钮输出 Yes，反之输出 No
+    if (ETHX_ShowConfirmMessageBox("Question", "Are you OK ?", ETHX_MSGBOX_WARNING))
+        std::cout << "Yes" << std::endl;
+    else
+        std::cout << "No" << std::endl;
     ```
 + **相关内容：**
     - [enum ETHX_MessageBoxStyle](#ETHX_MessageBoxStyle)
     - [ETHX_ShowMessageBox()](#ETHX_ShowMessageBox)
+
+***
+
+<a id="ETHX_SetWindowTitle"></a>
+### ETHX_SetWindowTitle()
++ **功能：** 设置窗口标题
++ **函数原型：**
+    ```c++
+    void ETHX_SetWindowTitle(std::string title);
+    ```
++ **参数简介：** 
+    | 参数    | 简介     |
+    |:--------|:---------|
+    | `title` | 窗口标题 |
++ **返回值简介：** 无
++ **相关内容：**
+    - [ETHX_InitWindow()](#ETHX_InitWindow)
+    - [ETHX_GetWindowTitle()](#ETHX_GetWindowTitle)
