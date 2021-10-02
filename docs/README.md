@@ -27,6 +27,22 @@
 
 <details>
     <summary>🖥 窗口控制相关函数</summary>
+
++ [ETHX_InitWindow()](#ETHX_InitWindow)
++ [ETHX_QuitWindow()](#ETHX_QuitWindow)
++ [ETHX_ShowMessageBox()](#ETHX_ShowMessageBox)
++ [ETHX_ShowConfirmMessageBox()](#ETHX_ShowConfirmMessageBox)
++ [ETHX_SetWindowTitle()](#ETHX_SetWindowTitle)
++ [ETHX_GetWindowTitle()](#ETHX_GetWindowTitle)
++ [ETHX_SetWindowFullscreen()](#ETHX_SetWindowFullscreen)
++ [ETHX_SetWindowSize()](#ETHX_SetWindowSize)
++ [ETHX_GetWindowSize()](#ETHX_GetWindowSize)
++ [ETHX_GetWindowSize_HDPI()](#ETHX_GetWindowSize_HDPI)
++ [ETHX_SetWindowIcon()](#ETHX_SetWindowIcon)
++ [ETHX_SetWindowIcon()](#ETHX_SetWindowIcon)
++ [ETHX_ClearWindow()](#ETHX_ClearWindow)
++ [ETHX_UpdateWindow()](#ETHX_UpdateWindow)
+
 </details>
 
 <details>
@@ -189,6 +205,7 @@
 + **成员及简介：**
     | 成员                     | 简介           |
     |:-------------------------|:---------------|
+    | `ETHX_WINDOW_DEFAULT`    | 窗口默认样式   |
     | `ETHX_WINDOW_FULLSCREEN` | 全屏窗口       |
     | `ETHX_WINDOW_BORDERLESS` | 无边框窗口     |
     | `ETHX_WINDOW_RESIZABLE`  | 窗口大小可变   |
@@ -256,30 +273,185 @@
 ### enum ETHX_KeyCode
 + **功能：** 用以描述键盘按键键码
 + **成员及简介：**
-    | 成员           | 简介            |
-    |:---------------|:----------------|
-    | `ETHX_KC_0`    | 数字：0         |
-    | `ETHX_KC_1`    | 数字：1         |
-    | `ETHX_KC_2`    | 数字：2         |
-    | `ETHX_KC_3`    | 数字：3         |
-    | `ETHX_KC_4`    | 数字：4         |
-    | `ETHX_KC_5`    | 数字：5         |
-    | `ETHX_KC_6`    | 数字：6         |
-    | `ETHX_KC_7`    | 数字：7         |
-    | `ETHX_KC_8`    | 数字：8         |
-    | `ETHX_KC_9`    | 数字：9         |
-    | `ETHX_KCP_0`   | 小键盘数字：0   |
-    | `ETHX_KCP_00`  | 小键盘数字：00  |
-    | `ETHX_KCP_000` | 小键盘数字：000 |
-    | `ETHX_KCP_0`   | 小键盘数字：0   |
-    | `ETHX_KCP_1`   | 小键盘数字：1   |
-    | `ETHX_KCP_2`   | 小键盘数字：2   |
-    | `ETHX_KCP_3`   | 小键盘数字：3   |
-    | `ETHX_KCP_4`   | 小键盘数字：4   |
-    | `ETHX_KCP_5`   | 小键盘数字：5   |
-    | `ETHX_KCP_6`   | 小键盘数字：6   |
-    | `ETHX_KCP_7`   | 小键盘数字：7   |
-    | `ETHX_KCP_8`   | 小键盘数字：8   |
-    | `ETHX_KCP_9`   | 小键盘数字：9   |
+    |         成员         |                             简介                             |           成员            |       简介        |
+    |:--------------------:|:------------------------------------------------------------:|:-------------------------:|:-----------------:|
+    |     `ETHX_KC_0`      |                              0                               |       `ETHX_KC_TAB`       |        Tab        |
+    |     `ETHX_KC_1`      |                              1                               |    `ETHX_KC_CAPSLOCK`     |     大小写锁      |
+    |     `ETHX_KC_2`      |                              2                               |     `ETHX_KC_NUMLOCK`     |      数字锁       |
+    |     `ETHX_KC_3`      |                              3                               |   `ETHX_KC_PRINTSCREEN`   |       截屏        |
+    |     `ETHX_KC_4`      |                              4                               |   `ETHX_KC_SCROLLLOCK`    |     滚动锁定      |
+    |     `ETHX_KC_5`      |                              5                               |      `ETHX_KC_PAUSE`      |       暂停        |
+    |     `ETHX_KC_6`      |                              6                               |    `ETHX_KC_AUDIOMUTE`    |       静音        |
+    |     `ETHX_KC_7`      |                              7                               |    `ETHX_KC_AUDIOPREV`    |      上一首       |
+    |     `ETHX_KC_8`      |                              8                               |    `ETHX_KC_AUDIONEXT`    |      下一首       |
+    |     `ETHX_KC_9`      |                              9                               |    `ETHX_KC_AUDIOPLAY`    |       播放        |
+    |    `ETHX_KCP_F1`     |                              F1                              |    `ETHX_KC_AUDIOSTOP`    |       停止        |
+    |    `ETHX_KCP_F2`     |                              F2                              |    `ETHX_KC_VOLUMEUP`     |      音量 +       |
+    |    `ETHX_KCP_F3`     |                              F3                              |   `ETHX_KC_VOLUMEDOWN`    |      音量 -       |
+    |    `ETHX_KCP_F4`     |                              F4                              |  `ETHX_KC_BRIGHTNESSUP`   |      亮度 +       |
+    |    `ETHX_KCP_F5`     |                              F5                              | `ETHX_KC_BRIGHTNESSDOWN`  |      亮度 -       |
+    |    `ETHX_KCP_F6`     |                              F6                              |    `ETHX_KC_BACKQUOTE`    |         `         |
+    |    `ETHX_KCP_F7`     |                              F7                              |     `ETHX_KC_EXCLAIM`     |         !         |
+    |    `ETHX_KCP_F8`     |                              F8                              |       `ETHX_KC_AT`        |         @         |
+    |    `ETHX_KCP_F9`     |                              F9                              |      `ETHX_KC_HASH`       |         #         |
+    |    `ETHX_KC_F10`     |                             F10                              |     `ETHX_KC_DOLLAR`      |         $         |
+    |    `ETHX_KC_F11`     |                             F11                              |      `ETHX_KC_CARET`      |         ^         |
+    |    `ETHX_KC_F12`     |                             F12                              |    `ETHX_KC_AMPERSAND`    |         &         |
+    |    `ETHX_KC_F13`     |                             F13                              |    `ETHX_KC_ASTERISK`     |         *         |
+    |    `ETHX_KC_F14`     |                             F14                              |    `ETHX_KC_LEFTPAREN`    |         (         |
+    |    `ETHX_KC_F15`     |                             F15                              |   `ETHX_KC_RIGHTPAREN`    |         )         |
+    |    `ETHX_KC_F16`     |                             F16                              |      `ETHX_KC_MINUS`      |         -         |
+    |    `ETHX_KC_F17`     |                             F17                              |   `ETHX_KC_UNDERSCORE`    |         _         |
+    |    `ETHX_KC_F18`     |                             F18                              |      `ETHX_KC_PLUS`       |         +         |
+    |    `ETHX_KC_F19`     |                             F19                              |     `ETHX_KC_EQUALS`      |         =         |
+    |    `ETHX_KC_F20`     |                             F20                              |   `ETHX_KC_LEFTBRACKET`   |         [         |
+    |    `ETHX_KC_F21`     |                             F21                              |  `ETHX_KC_RIGHTBRACKET`   |         ]         |
+    |    `ETHX_KC_F22`     |                             F22                              |   `ETHX_KCP_LEFTBRACE`    |         {         |
+    |    `ETHX_KC_F23`     |                             F23                              |   `ETHX_KCP_RIGHTBRACE`   |         }         |
+    |    `ETHX_KC_F24`     |                             F24                              |      `ETHX_KC_COLON`      |         :         |
+    |     `ETHX_KC_A`      |                              A                               |    `ETHX_KC_SEMICOLON`    |         ;         |
+    |     `ETHX_KC_B`      |                              B                               |    `ETHX_KC_BACKSLASH`    |         \         |
+    |     `ETHX_KC_C`      |                              C                               |      `ETHX_KC_QUOTE`      |         ‘         |
+    |     `ETHX_KC_D`      |                              D                               |    `ETHX_KC_DBLQUOTE`     |         "         |
+    |     `ETHX_KC_E`      |                              E                               |      `ETHX_KC_LESS`       |         <         |
+    |     `ETHX_KC_F`      |                              F                               |     `ETHX_KC_GREATER`     |         >         |
+    |     `ETHX_KC_G`      |                              G                               |      `ETHX_KC_COMMA`      |         ,         |
+    |     `ETHX_KC_H`      |                              H                               |     `ETHX_KC_PERIOD`      |         .         |
+    |     `ETHX_KC_I`      |                              I                               |    `ETHX_KC_QUESTION`     |         ?         |
+    |     `ETHX_KC_J`      |                              J                               |      `ETHX_KC_SLASH`      |         /         |
+    |     `ETHX_KC_K`      |                              K                               |   `ETHX_KC_VERTICALBAR`   |        \|         |
+    |     `ETHX_KC_L`      |                              L                               |       `ETHX_KC_WWW`       |        WWW        |
+    |     `ETHX_KC_M`      |                              M                               |      `ETHX_KC_MAIL`       |       Email       |
+    |     `ETHX_KC_N`      |                              N                               |       `ETHX_KCP_0`        |     小键盘：0     |
+    |     `ETHX_KC_O`      |                              O                               |       `ETHX_KCP_00`       |    小键盘：00     |
+    |     `ETHX_KC_P`      |                              P                               |      `ETHX_KCP_000`       |    小键盘：000    |
+    |     `ETHX_KC_Q`      |                              Q                               |       `ETHX_KCP_0`        |     小键盘：0     |
+    |     `ETHX_KC_R`      |                              R                               |       `ETHX_KCP_1`        |     小键盘：1     |
+    |     `ETHX_KC_S`      |                              S                               |       `ETHX_KCP_2`        |     小键盘：2     |
+    |     `ETHX_KC_T`      |                              T                               |       `ETHX_KCP_3`        |     小键盘：3     |
+    |     `ETHX_KC_U`      |                              U                               |       `ETHX_KCP_4`        |     小键盘：4     |
+    |     `ETHX_KC_V`      |                              V                               |       `ETHX_KCP_5`        |     小键盘：5     |
+    |     `ETHX_KC_W`      |                              W                               |       `ETHX_KCP_6`        |     小键盘：6     |
+    |     `ETHX_KC_X`      |                              X                               |       `ETHX_KCP_7`        |     小键盘：7     |
+    |     `ETHX_KC_Y`      |                              Y                               |       `ETHX_KCP_8`        |     小键盘：8     |
+    |     `ETHX_KC_Z`      |                              Z                               |       `ETHX_KCP_9`        |     小键盘：9     |
+    |    `ETHX_KC_ESC`     |                             Esc                              |       `ETHX_KCP_A`        |     小键盘：A     |
+    |   `ETHX_KC_ENTER`    |                            Enter                             |       `ETHX_KCP_B`        |     小键盘：B     |
+    | `ETHX_KC_BACKSPACE`  |                          Backspace                           |       `ETHX_KCP_C`        |     小键盘：C     |
+    |   `ETHX_KC_RIGHT`    |                              →                               |       `ETHX_KCP_D`        |     小键盘：D     |
+    |    `ETHX_KC_LEFT`    |                              ←                               |       `ETHX_KCP_E`        |     小键盘：E     |
+    |    `ETHX_KC_DOWN`    |                              ↓                               |       `ETHX_KCP_F`        |     小键盘：F     |
+    |     `ETHX_KC_UP`     |                              ↑                               |     `ETHX_KCP_ENTER`      |   小键盘：Enter   |
+    |   `ETHX_KC_INSERT`   |                            Insert                            |   `ETHX_KCP_BACKSPACE`    | 小键盘：Backspace |
+    |   `ETHX_KC_DELETE`   |                            Delete                            |     `ETHX_KC_KP_TAB`      |    小键盘：Tab    |
+    |    `ETHX_KC_HOME`    |                             Home                             |    `ETHX_KC_KP_EXCLAM`    |     小键盘：!     |
+    |    `ETHX_KC_END`     |                             End                              |      `ETHX_KC_KP_AT`      |     小键盘：@     |
+    |   `ETHX_KC_PAGEUP`   |                            PageUp                            |     `ETHX_KC_KP_HASH`     |   小键盘：Hash    |
+    |  `ETHX_KC_PAGEDOWN`  |                           PageDown                           |     `ETHX_KCP_CARET`      |     小键盘：^     |
+    |  `ETHX_KC_LEFTCTRL`  |                           左 Ctrl                            |   `ETHX_KCP_AMPERSAND`    |     小键盘：&     |
+    |  `ETHX_KC_LEFTGUI`   | 左 GUI（在 Windows 下为 Windows 键，在 Mac 下为 Control 键） |  `ETHX_KCP_DBLAMPERSAND`  |    小键盘：&&     |
+    |  `ETHX_KC_LEFTALT`   |                            左 Alt                            |    `ETHX_KCP_ASTERISK`    |     小键盘：*     |
+    | `ETHX_KC_LEFTSHIFT`  |                           左 Shift                           |   `ETHX_KCP_LEFTPAREN`    |     小键盘：(     |
+    | `ETHX_KC_RIGHTCTRL`  |                           右 Ctrl                            |   `ETHX_KCP_RIGHTPAREN`   |     小键盘：)     |
+    |  `ETHX_KC_RIGHTGUI`  | 右 GUI（在 Windows 下为 Windows 键，在 Mac 下为 Control 键） |     `ETHX_KCP_MINUS`      |     小键盘：-     |
+    |  `ETHX_KC_RIGHTALT`  |                            右 Alt                            |      `ETHX_KCP_PLUS`      |     小键盘：+     |
+    | `ETHX_KC_RIGHTSHIFT` |                           右 Shift                           |     `ETHX_KCP_EQUALS`     |     小键盘：=     |
+    |   `ETHX_KC_SPACE`    |                             空格                             | `ETHX_KCP_DBLVERTICALBAR` |   小键盘：\|\|    |
++ **备注：**  
+ETHX_KeyCode 结构体仅表示键码表，部分字符可能无法通过物理按键触发
 + **相关内容：**
     - [enum ETHX_Event](#ETHX_Event)
+    - [ETHX_UpdateEvent()](#ETHX_UpdateEvent)
+
+***
+
+<a id="ETHX_InitWindow"></a>
+### ETHX_InitWindow()
++ **功能：** 初始化 EtherX 并创建窗口
++ **函数原型：**
+    ```c++
+        void ETHX_InitWindow(const std::string& title, int width, int height, ETHX_WindowStyle style = ETHX_WINDOW_DEFAULT);
+    ```
++ **参数简介：**
+    | 参数     | 简介     |
+    |:---------|:---------|
+    | `title`  | 窗口标题 |
+    | `width`  | 窗口宽度 |
+    | `height` | 窗口高度 |
+    | `style`  | 窗口样式 |
++ **返回值简介：** 无
++ **备注：**  
+ETHX_InitWindow 用以初始化 EtherX 内部组件，必须在调用其他 EtherX 函数前调用
++ **代码示例：**
+    ```c++
+        // 创建一个标题为 HelloWorld 的尺寸为 1280x720 的大小可变窗口
+        ETHX_InitWindow("HelloWorld", 1280, 720, ETHX_WINDOW_RESIZABLE);
+    ```
++ **相关内容：**
+    - [enum ETHX_WindowStyle](#ETHX_WindowStyle)
+    - [ETHX_QuitWindow()](#ETHX_QuitWindow)
+
+***
+
+<a id="ETHX_QuitWindow"></a>
+### ETHX_QuitWindow()
++ **功能：** 退出 EtherX 并关闭窗口
++ **函数原型：**
+    ```c++
+        void ETHX_QuitWindow();
+    ```
++ **参数简介：** 无
++ **返回值简介：** 无
++ **相关内容：**
+    - [ETHX_InitWindow()](#ETHX_InitWindow)
+
+***
+
+<a id="ETHX_ShowMessageBox"></a>
+### ETHX_ShowMessageBox()
++ **功能：** 显示信息提示框
++ **函数原型：**
+    ```c++
+        void ETHX_ShowMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style);
+    ```
++ **参数简介：** 
+    | 参数    | 简介           |
+    |:--------|:---------------|
+    | `title` | 信息提示框标题 |
+    | `msg`   | 信息提示框内容 |
+    | `style` | 信息提示框样式 |
++ **返回值简介：** 无
++ **相关内容：**
+    - [enum ETHX_MessageBoxStyle](#ETHX_MessageBoxStyle)
+    - [ETHX_ShowConfirmMessageBox()](#ETHX_ShowConfirmMessageBox)
+
+***
+
+<a id="ETHX_ShowConfirmMessageBox"></a>
+### ETHX_ShowConfirmMessageBox()
++ **功能：** 显示信息提示确认窗口
++ **函数原型：**
+    ```c++
+        bool ETHX_ShowConfirmMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style,
+	const std::string& ok_text = "OK", const std::string& cancel_text = "Cancel");
+    ```
++ **参数简介：** 
+    | 参数          | 简介           |
+    |:--------------|:---------------|
+    | `title`       | 信息提示框标题 |
+    | `msg`         | 信息提示框内容 |
+    | `style`       | 信息提示框样式 |
+    | `ok_text`     | 确认按钮文本   |
+    | `cancel_text` | 取消按钮文本   |
++ **返回值简介：** 用户点击确认按钮返回 `true`，反之返回 `false`
++ **代码示例：**
+    ```c++
+        // 如果用户点击确认按钮输出 Yes，反之输出 No
+        if (ETHX_ShowConfirmMessageBox("Question", "Are you OK ?", ETHX_MSGBOX_WARNING))
+            std::cout << "Yes" << std::endl;
+        else
+            std::cout << "No" << std::endl;
+    ```
++ **相关内容：**
+    - [enum ETHX_MessageBoxStyle](#ETHX_MessageBoxStyle)
+    - [ETHX_ShowMessageBox()](#ETHX_ShowMessageBox)

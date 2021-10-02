@@ -1,6 +1,8 @@
 #ifndef _ETHERX_H_
 #define _ETHERX_H_
 
+#define ETHERX_IMPLEMENTATION
+
 /*****************************
 * 
 * EtherX - 基于 SDL2 的 EasyX 开源跨平台全套解决方案
@@ -38,6 +40,7 @@ enum ETHX_MessageBoxStyle
 
 enum ETHX_WindowStyle
 {
+	ETHX_WINDOW_DEFAULT = 0x00000004,
 	ETHX_WINDOW_FULLSCREEN = 0x00001000,
 	ETHX_WINDOW_BORDERLESS = 0x00000010,
 	ETHX_WINDOW_RESIZABLE = 0x00000020,
@@ -223,7 +226,7 @@ enum ETHX_KeyCode
 	ETHX_KC_KP_HASH = 1073742028,
 	ETHX_KC_DOLLAR = 36,
 	ETHX_KC_CARET = 94,
-	ETHX_KCP_POWER = 1073742019,
+	ETHX_KCP_CARET = 1073742019,
 	ETHX_KC_AMPERSAND = 38,
 	ETHX_KCP_AMPERSAND = 1073742023,
 	ETHX_KCP_DBLAMPERSAND = 1073742024,
@@ -248,14 +251,14 @@ enum ETHX_KeyCode
 	ETHX_KC_SEMICOLON = 59,
 	ETHX_KC_BACKSLASH = 92,
 	ETHX_KC_QUOTE = 39,
-	ETHX_KC_QUOTEDBL = 34,
+	ETHX_KC_DBLQUOTE = 34,
 	ETHX_KC_LESS = 60,
 	ETHX_KC_GREATER = 62,
 	ETHX_KC_COMMA = 44,
 	ETHX_KC_PERIOD = 46,
 	ETHX_KC_QUESTION = 63,
 	ETHX_KC_SLASH = 47,
-	ETHX_KCP_VERTICALBAR = 1073742025,
+	ETHX_KC_VERTICALBAR = 1073742025,
 	ETHX_KCP_DBLVERTICALBAR = 1073742026,
 	ETHX_KC_WWW = 1073742088,
 	ETHX_KC_MAIL = 1073742089,
@@ -291,10 +294,10 @@ struct ETHX_Event
 };
 
 // Window API
-ETHX_API void ETHX_InitWindow(const std::string& title, int width, int height, ETHX_WindowStyle style);
+ETHX_API void ETHX_InitWindow(const std::string& title, int width, int height, ETHX_WindowStyle style = ETHX_WINDOW_DEFAULT);
 ETHX_API void ETHX_QuitWindow();
 ETHX_API void ETHX_ShowMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style);
-bool ETHX_ShowConfirmMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style,
+ETHX_API bool ETHX_ShowConfirmMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style,
 	const std::string& ok_text = "OK", const std::string& cancel_text = "Cancel");
 ETHX_API void ETHX_SetWindowTitle(std::string title);
 ETHX_API std::string ETHX_GetWindowTitle();
