@@ -65,8 +65,8 @@
 | [ETHX_DrawRectangle()](#ETHX_DrawRectangle)       | 绘制矩形                           |
 | [ETHX_DrawCircle()](#ETHX_DrawCircle)             | 绘制圆                             |
 | [ETHX_DrawEllipse()](#ETHX_DrawEllipse)           | 绘制椭圆                           |
-| [ETHX_DrawTriangle()](#ETHX_DrawTriangle)         | 绘制扇形                           |
-| [ETHX_DrawPie()](#ETHX_DrawPie)                   | 绘制三角形                         |
+| [ETHX_DrawPie()](#ETHX_DrawPie)                   | 绘制扇形                           |
+| [ETHX_DrawTriangle()](#ETHX_DrawTriangle)         | 绘制三角形                         |
 | [ETHX_LoadFont()](#ETHX_LoadFont)                 | 加载字体对象                       |
 | [ETHX_SetFontStyle()](#ETHX_SetFontStyle)         | 设置字体样式                       |
 | [ETHX_GetFontStyle()](#ETHX_GetFontStyle)         | 获取字体样式                       |
