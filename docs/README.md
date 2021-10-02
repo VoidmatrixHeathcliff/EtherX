@@ -645,7 +645,7 @@ EtherX 所有的窗口绘图操作都在渲染缓冲区中进行，只有调用 
 ### ETHX_LoadImage()
 + **功能：** 加载图像对象
 + **函数原型：**
-    - 原型 1：
+    - **原型 1：**
         ```c++
         ETHX_Image* ETHX_LoadImage(const std::string& path);
         ```
@@ -654,7 +654,7 @@ EtherX 所有的窗口绘图操作都在渲染缓冲区中进行，只有调用 
             |:-------|:-------------|
             | `path` | 图像文件路径 |
         + **返回值简介：** 图像对象指针，加载失败则返回 `nullptr`
-    - 原型 2：
+    - **原型 2：**
         ```c++
         ETHX_API ETHX_Image* ETHX_LoadImage(void* data, size_t size);
         ```
@@ -753,7 +753,7 @@ EtherX 所有的窗口绘图操作都在渲染缓冲区中进行，只有调用 
 ### ETHX_DrawImage()
 + **功能：** 绘制图像
 + **函数原型：**
-    - 原型 1：
+    - **原型 1：**
         ```c++
         void ETHX_DrawImage(ETHX_Image* image, const ETHX_Point& pos);
         ```
@@ -763,7 +763,7 @@ EtherX 所有的窗口绘图操作都在渲染缓冲区中进行，只有调用 
             | `image` | 图像对象                           |
             | `pos`   | 图像左上角顶点在屏幕坐标系下的位置 |
         + **返回值简介：** 无
-    - 原型 2：
+    - **原型 2：**
         ```c++
         void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect);
         ```
@@ -772,8 +772,8 @@ EtherX 所有的窗口绘图操作都在渲染缓冲区中进行，只有调用 
             |:------------|:-----------------------------|
             | `image`     | 图像对象                     |
             | `show_rect` | 图像在屏幕坐标系下的显示区域 |
-        + **返回值简介：无
-    - 原型 3：
+        + **返回值简介：** 无
+    - **原型 3：**
         ```c++
         void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect, const ETHX_Rect& clip_rect);
         ```
@@ -783,8 +783,8 @@ EtherX 所有的窗口绘图操作都在渲染缓冲区中进行，只有调用 
             | `image`     | 图像对象                     |
             | `show_rect` | 图像在屏幕坐标系下的显示区域 |
             | `clip_rect` | 图像在图像坐标系下的裁剪区域 |
-        + **返回值简介：无
-    - 原型 4：
+        + **返回值简介：** 无
+    - **原型 4：**
         ```c++
         ETHX_API void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect, const ETHX_Rect& clip_rect, const ETHX_Point& center, double angle, ETHX_ImageStyle style = ETHX_IMAGE_FLIP_NONE);
         ```
@@ -797,7 +797,7 @@ EtherX 所有的窗口绘图操作都在渲染缓冲区中进行，只有调用 
             | `center`    | 图像在图像坐标系下的旋转中心位置             |
             | `angle`     | 图像在图像坐标系下的旋转角度，逆时针为正方向 |
             | `style`     | 图像在图像坐标系下的翻转样式，默认为无翻转   |
-        + **返回值简介：无
+        + **返回值简介：** 无
 + **备注：**  
 ETHX_DrawImage 四个重载的应用场景总结：
     | 参数   | 简介                                           |
@@ -808,12 +808,14 @@ ETHX_DrawImage 四个重载的应用场景总结：
     | 重载 4 | 需要对图像进行旋转或翻转显示时使用             |
 + **代码示例：**
     ```c++
-    ETHX_Image* pImage;
-    // 检查是否加载成功，若失败则输出提示信息
-    if (!(pImage = ETHX_LoadImage("Hello.png")))
-        std::cout << "Load Image Error !" << std::endl;
-    // 销毁图像对象内存
-    delete pImage; pImage = nullptr;
+    // ETHX_Image* pImage = ...
+
+    ETHX_Rect show_rect;
+    show_rect.x = 0, show_rect.y = 0;
+    ETHX_GetWindowSize(show_rect.w, show_rect.h);
+
+    // 将图片铺满窗口
+    ETHX_DrawImage(pImage, show_rect);
     ```
 + **相关内容：**
     - [enum ETHX_ImageStyle](#ETHX_ImageStyle)
@@ -823,3 +825,239 @@ ETHX_DrawImage 四个重载的应用场景总结：
     - [ETHX_DrawImage()](#ETHX_DrawImage)
     - [附加内容：窗口坐标系](#window-coordinate-system)
     - [附加内容：图像坐标系](#image-coordinate-system)
+
+***
+
+<a id="ETHX_SetDrawColor"></a>
+### ETHX_SetDrawColor()
++ **功能：** 设置绘图颜色
++ **函数原型：**
+    ```c++
+    void ETHX_SetDrawColor(const ETHX_Color& color);
+    ```
++ **参数简介：**  
+    | 参数    | 简介     |
+    |:--------|:---------|
+    | `color` | 绘图颜色 |
++ **返回值简介：** 无
++ **备注：**  
+在设置绘图颜色后，后续所有的清屏、图元绘制和字体渲染都将使用此颜色
++ **相关内容：**
+    - [struct ETHX_Color](#ETHX_Color)
+    - [ETHX_GetDrawColor()](#ETHX_GetDrawColor)
+
+***
+
+<a id="ETHX_GetDrawColor"></a>
+### ETHX_GetDrawColor()
++ **功能：** 获取当前绘图颜色
++ **函数原型：**
+    ```c++
+    ETHX_Color ETHX_GetDrawColor();
+    ```
++ **参数简介：无
++ **返回值简介：** 当前绘图颜色
++ **相关内容：**
+    - [struct ETHX_Color](#ETHX_Color)
+    - [ETHX_SetDrawColor()](#ETHX_SetDrawColor)
+
+***
+
+<a id="ETHX_DrawPoint"></a>
+### ETHX_DrawPoint()
++ **功能：** 绘制点
++ **函数原型：**
+    ```c++
+    void ETHX_DrawPoint(const ETHX_Point& point);
+    ```
++ **参数简介：  
+    | 参数    | 简介                   |
+    |:--------|:-----------------------|
+    | `point` | 点在窗口坐标系下的位置 |
++ **返回值简介：** 无
++ **相关内容：**
+    - [struct ETHX_Point](#ETHX_Point)
+
+***
+
+<a id="ETHX_DrawLine"></a>
+### ETHX_DrawLine()
++ **功能：** 绘制线段
++ **函数原型：**
+    - **原型 1：**
+        ```c++
+        void ETHX_DrawLine(const ETHX_Point& begin, const ETHX_Point& end);
+        ```
+        + **参数简介：**  
+            | 参数    | 简介     |
+            |:--------|:---------|
+            | `begin` | 线段起点 |
+            | `end`   | 线段终点 |
+        + **返回值简介：** 无
+    - **原型 2：**
+        ```c++
+        void ETHX_DrawLine(const ETHX_Point& begin, const ETHX_Point& end, Uint8 width);
+        ```
+        + **参数简介：**  
+            | 参数    | 简介     |
+            |:--------|:---------|
+            | `begin` | 线段起点 |
+            | `end`   | 线段终点 |
+            | `width` | 线条宽度 |
+        + **返回值简介：** 无
++ **相关内容：**
+    - [struct ETHX_Point](#ETHX_Point)
+
+***
+
+<a id="ETHX_DrawRectangle"></a>
+### ETHX_DrawRectangle()
++ **功能：** 绘制矩形
++ **函数原型：**
+    - **原型 1：**
+        ```c++
+        void ETHX_DrawRectangle(const ETHX_Rect& rect, bool fill = false);
+        ```
+        + **参数简介：**  
+            | 参数   | 简介                     |
+            |:-------|:-------------------------|
+            | `rect` | 矩形在窗口坐标系下的区域 |
+            | `fill` | 是否填充，默认为不填充   |
+        + **返回值简介：** 无
+    - **原型 2：**
+        ```c++
+        void ETHX_DrawRectangle(const ETHX_Rect& rect, int radius, bool fill = false);
+        ```
+        + **参数简介：**  
+            | 参数     | 简介                     |
+            |:---------|:-------------------------|
+            | `rect`   | 矩形在窗口坐标系下的区域 |
+            | `radius` | 矩形圆角所在圆的半径大小 |
+            | `fill`   | 是否填充，默认为不填充   |
+        + **返回值简介：** 无
++ **相关内容：**
+    - [struct ETHX_Rect](#ETHX_Rect)
+
+***
+
+<a id="ETHX_DrawCircle"></a>
+### ETHX_DrawCircle()
++ **功能：** 绘制圆
++ **函数原型：**
+    ```c++
+    void ETHX_DrawCircle(const ETHX_Point& center, int radius, bool fill = false);
+    ```
++ **参数简介：  
+    | 参数    | 简介                   |
+    |:--------|:-----------------------|
+    | `center`   | 圆心在窗口坐标系下的位置 |
+    | `radius` | 圆的半径大小 |
+    | `fill`   | 是否填充，默认为不填充   |
++ **返回值简介：** 无
++ **相关内容：**
+    - [struct ETHX_Point](#ETHX_Point)
+
+***
+
+<a id="ETHX_DrawEllipse"></a>
+### ETHX_DrawEllipse()
++ **功能：** 绘制椭圆
++ **函数原型：**
+    ```c++
+    void ETHX_DrawEllipse(const ETHX_Point& center, int radius_x, int radius_y, bool fill = false);
+    ```
++ **参数简介：  
+    | 参数    | 简介                   |
+    |:--------|:-----------------------|
+    | `center`   | 椭圆圆心在窗口坐标系下的位置 |
+    | `radius_x` | 椭圆在窗口坐标系下 x 轴方向半径大小 |
+    | `radius_y` | 椭圆在窗口坐标系下 x 轴方向半径大小 |
+    | `fill`   | 是否填充，默认为不填充   |
++ **返回值简介：** 无
++ **相关内容：**
+    - [struct ETHX_Point](#ETHX_Point)
+
+***
+
+<a id="ETHX_DrawPie"></a>
+### ETHX_DrawPie()
++ **功能：** 绘制扇形
++ **函数原型：**
+    ```c++
+    void ETHX_DrawPie(const ETHX_Point& center, int radius, int start_angle, int end_angle, bool fill = false);
+    ```
++ **参数简介：  
+    | 参数    | 简介                   |
+    |:--------|:-----------------------|
+    | `center`   | 扇形所在圆的圆心在窗口坐标系下的位置 |
+    | `radius` | 扇形所在圆的半径大小 |
+    | `start_angle` | 扇形所在圆的的起始角度，逆时针为正方向 |
+    | `end_angle` | 扇形所在圆的的终止角度，逆时针为正方向 |
+    | `fill`   | 是否填充，默认为不填充   |
++ **返回值简介：** 无
++ **相关内容：**
+    - [struct ETHX_Point](#ETHX_Point)
+
+***
+
+<a id="ETHX_DrawTriangle"></a>
+### ETHX_DrawTriangle()
++ **功能：** 绘制三角形
++ **函数原型：**
+    ```c++
+    void ETHX_DrawTriangle(const ETHX_Point& point_1, const ETHX_Point& point_2, const ETHX_Point& point_3, bool fill = false);
+    ```
++ **参数简介：  
+    | 参数    | 简介                   |
+    |:--------|:-----------------------|
+    | `point_1`   | 三角形第 1 个顶点在窗口坐标系下的位置 |
+    | `point_2` | 三角形第 2 个顶点在窗口坐标系下的位置 |
+    | `point_3` | 三角形第 3 个顶点在窗口坐标系下的位置 |
+    | `fill`   | 是否填充，默认为不填充   |
++ **返回值简介：** 无
++ **相关内容：**
+    - [struct ETHX_Point](#ETHX_Point)
+
+***
+
+<a id="ETHX_LoadFont"></a>
+### ETHX_LoadFont()
++ **功能：** 加载字体对象
++ **函数原型：**
+    - **原型 1：**
+        ```c++
+        ETHX_Font* ETHX_LoadFont(const std::string& path, int ptsize);
+        ```
+        + **参数简介：**  
+            | 参数   | 简介         |
+            |:-------|:-------------|
+            | `path` | 图像文件路径 |
+            | `ptsize` | 字体大小 |
+        + **返回值简介：** 字体对象指针，加载失败则返回 `nullptr`
+    - **原型 2：**
+        ```c++
+        ETHX_Font* ETHX_LoadFont(void* data, size_t size, int ptsize);
+        ```
+        + **参数简介：**  
+            | 参数   | 简介                   |
+            |:-------|:-----------------------|
+            | `data` | 存储字体数据的内存指针 |
+            | `size` | 字体数据大小           |
+            | `ptsize` | 字体大小           |
+        + **返回值简介：** 字体对象指针，加载失败则返回 `nullptr`
++ **备注：**  
+字体对象指针可以直接使用 `delete` 销毁内存；  
+字体大小为在 72DPI 下的字体大小，这通常代表着单位为像素的文本高度
++ **代码示例：**
+    ```c++
+    ETHX_Font* pFont;
+    // 检查是否加载成功，若失败则输出提示信息
+    if (!(pFont = ETHX_LoadFont("MyFont.ttf", 75)))
+        std::cout << "Load Font Error !" << std::endl;
+    // 销毁图像对象内存
+    delete pFont; pFont = nullptr;
+    ```
++ **相关内容：**
+    - [struct ETHX_Font](#ETHX_Font)
+    - [ETHX_DrawText()](#ETHX_DrawText)
+    - [ETHX_CreateTextImage()](#ETHX_CreateTextImage)
