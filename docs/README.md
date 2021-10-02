@@ -12,13 +12,13 @@
 + [struct ETHX_Rect](#ETHX_Rect)
 + [struct ETHX_Point](#ETHX_Point)
 + [struct ETHX_Event](#ETHX_Event)
-+ [struct ETHX_Sprite](#ETHX_Sprite)
++ [struct ETHX_Image](#ETHX_Image)
 + [struct ETHX_Font](#ETHX_Font)
 + [struct ETHX_Music](#ETHX_Music)
 + [struct ETHX_Sound](#ETHX_Sound)
 + [enum ETHX_MessageBoxStyle](#ETHX_MessageBoxStyle)
 + [enum ETHX_WindowStyle](#ETHX_WindowStyle)
-+ [enum ETHX_SpriteStyle](#ETHX_SpriteStyle)
++ [enum ETHX_ImageStyle](#ETHX_ImageStyle)
 + [enum ETHX_FontStyle](#ETHX_FontStyle)
 + [enum ETHX_EventType](#ETHX_EventType)
 + [enum ETHX_KeyCode](#ETHX_KeyCode)
@@ -58,7 +58,7 @@
     | `Uint8 b` | 颜色的蓝色分量，取值范围为 0~255            |
     | `Uint8 a` | 颜色的 α 通道，描述透明度，取值范围为 0~255 |
 + **相关内容：**
-    - [ETHX_SetSpriteColorKey()](#ETHX_SetSpriteColorKey)
+    - [ETHX_SetImageColorKey()](#ETHX_SetImageColorKey)
     - [ETHX_SetDrawColor()](#ETHX_SetDrawColor)
 
 ***
@@ -75,7 +75,7 @@
     | `int h` | 矩形高度                                  |
 + **相关内容：**
     - [ETHX_DrawRectangle()](#ETHX_DrawRectangle)
-    - [ETHX_DrawSprite()](#ETHX_DrawSprite)
+    - [ETHX_DrawImage()](#ETHX_DrawImage)
 
 ***
 
@@ -125,14 +125,14 @@
 
 ***
 
-<a id="ETHX_Sprite"></a>
-### struct ETHX_Sprite
+<a id="ETHX_Image"></a>
+### struct ETHX_Image
 + **功能：** 用以描述图像对象
 + **成员及简介：** 未公开
 + **相关内容：**
-    - [enum ETHX_SpriteStyle](#ETHX_SpriteStyle)
-    - [ETHX_LoadSprite()](#ETHX_LoadSprite)
-    - [ETHX_DrawSprite()](#ETHX_DrawSprite)
+    - [enum ETHX_ImageStyle](#ETHX_ImageStyle)
+    - [ETHX_LoadImage()](#ETHX_LoadImage)
+    - [ETHX_DrawImage()](#ETHX_DrawImage)
 
 ***
 
@@ -144,7 +144,7 @@
     - [enum ETHX_FontStyle](#ETHX_FontStyle)
     - [ETHX_LoadFont()](#ETHX_LoadFont)
     - [ETHX_DrawText()](#ETHX_DrawText)
-    - [ETHX_CreateTextSprite()](#ETHX_CreateTextSprite)
+    - [ETHX_CreateTextImage()](#ETHX_CreateTextImage)
 
 ***
 
@@ -199,17 +199,17 @@
 
 ***
 
-<a id="ETHX_SpriteStyle"></a>
-### enum ETHX_SpriteStyle
+<a id="ETHX_ImageStyle"></a>
+### enum ETHX_ImageStyle
 + **功能：** 用以描述图片对象翻转类型
 + **成员及简介：**
-    | 成员                    | 简介         |
-    |:------------------------|:-------------|
-    | `ETHX_SPRITE_FLIP_NONE` | 图片无翻转   |
-    | `ETHX_SPRITE_FLIP_H`    | 图片水平翻转 |
-    | `ETHX_SPRITE_FLIP_V`    | 图片竖直翻转 |
+    | 成员                   | 简介         |
+    |:-----------------------|:-------------|
+    | `ETHX_IMAGE_FLIP_NONE` | 图片无翻转   |
+    | `ETHX_IMAGE_FLIP_H`    | 图片水平翻转 |
+    | `ETHX_IMAGE_FLIP_V`    | 图片竖直翻转 |
 + **相关内容：**
-    - [ETHX_DrawSprite()](#ETHX_DrawSprite)
+    - [ETHX_DrawImage()](#ETHX_DrawImage)
 
 ***
 
@@ -234,28 +234,18 @@
 ### enum ETHX_EventType
 + **功能：** 用以描述事件类型
 + **成员及简介：**
-    | 成员                       | 简介         |
-    |:---------------------------|:-------------|
-    | `ETHX_ET_WINDOWSHOWN`      | 窗口显示     |
-    | `ETHX_ET_WINDOWHIDDEN`     | 窗口隐藏     |
-    | `ETHX_ET_WINDOWEXPOSED`    | 窗口暴露     |
-    | `ETHX_ET_WINDOWMOVED`      | 窗口移动     |
-    | `ETHX_ET_WINDOWRESIZED`    | 窗口大小改变 |
-    | `ETHX_ET_WINDOWMINIMIZED`  | 最大化窗口   |
-    | `ETHX_ET_WINDOWMAXIMIZED`  | 最小化窗口   |
-    | `ETHX_ET_WINDOWENTER`      | 光标进入窗口 |
-    | `ETHX_ET_WINDOWLEAVE`      | 光标离开窗口 |
-    | `ETHX_ET_WINDOWFOCUS_GET`  | 窗口获得焦点 |
-    | `ETHX_ET_WINDOWFOCUS_LOST` | 窗口失去焦点 |
-    | `ETHX_ET_WINDOWCLOSE`      | 窗口关闭     |
-    | `ETHX_ET_KEYDOWN`          | 键盘按键按下 |
-    | `ETHX_ET_KEYUP`            | 键盘按键抬起 |
-    | `ETHX_ET_MOUSEMOTION`      | 鼠标移动     |
-    | `ETHX_ET_MOUSEDOWN`        | 鼠标按键按下 |
-    | `ETHX_ET_MOUSEUP`          | 鼠标按键抬起 |
-    | `ETHX_ET_MOUSESCROLL`      | 鼠标滚轮滚动 |
-    | `ETHX_ET_TEXTINPUT`        | 文本输入     |
-    | `ETHX_ET_QUIT`             | 程序退出     |
+    | 成员                      | 简介         | 成员                       | 简介         |
+    |:--------------------------|:-------------|:---------------------------|:-------------|
+    | `ETHX_ET_WINDOWSHOWN`     | 窗口显示     | `ETHX_ET_WINDOWFOCUS_LOST` | 窗口失去焦点 |
+    | `ETHX_ET_WINDOWHIDDEN`    | 窗口隐藏     | `ETHX_ET_WINDOWCLOSE`      | 窗口关闭     |
+    | `ETHX_ET_WINDOWEXPOSED`   | 窗口暴露     | `ETHX_ET_KEYDOWN`          | 键盘按键按下 |
+    | `ETHX_ET_WINDOWMOVED`     | 窗口移动     | `ETHX_ET_KEYUP`            | 键盘按键抬起 |
+    | `ETHX_ET_WINDOWRESIZED`   | 窗口大小改变 | `ETHX_ET_MOUSEMOTION`      | 鼠标移动     |
+    | `ETHX_ET_WINDOWMINIMIZED` | 最大化窗口   | `ETHX_ET_MOUSEDOWN`        | 鼠标按键按下 |
+    | `ETHX_ET_WINDOWMAXIMIZED` | 最小化窗口   | `ETHX_ET_MOUSEUP`          | 鼠标按键抬起 |
+    | `ETHX_ET_WINDOWENTER`     | 光标进入窗口 | `ETHX_ET_MOUSESCROLL`      | 鼠标滚轮滚动 |
+    | `ETHX_ET_WINDOWLEAVE`     | 光标离开窗口 | `ETHX_ET_TEXTINPUT`        | 文本输入     |
+    | `ETHX_ET_WINDOWFOCUS_GET` | 窗口获得焦点 | `ETHX_ET_QUIT`             | 程序退出     |
 + **相关内容：**
     - [enum ETHX_Event](#ETHX_Event)
     - [ETHX_UpdateEvent()](#ETHX_UpdateEvent)
@@ -266,8 +256,30 @@
 ### enum ETHX_KeyCode
 + **功能：** 用以描述键盘按键键码
 + **成员及简介：**
-    | 成员                       | 简介         |
-    |:---------------------------|:-------------|
-    | `ETHX_ET_WINDOWSHOWN`      | 窗口显示     |
+    | 成员           | 简介            |
+    |:---------------|:----------------|
+    | `ETHX_KC_0`    | 数字：0         |
+    | `ETHX_KC_1`    | 数字：1         |
+    | `ETHX_KC_2`    | 数字：2         |
+    | `ETHX_KC_3`    | 数字：3         |
+    | `ETHX_KC_4`    | 数字：4         |
+    | `ETHX_KC_5`    | 数字：5         |
+    | `ETHX_KC_6`    | 数字：6         |
+    | `ETHX_KC_7`    | 数字：7         |
+    | `ETHX_KC_8`    | 数字：8         |
+    | `ETHX_KC_9`    | 数字：9         |
+    | `ETHX_KCP_0`   | 小键盘数字：0   |
+    | `ETHX_KCP_00`  | 小键盘数字：00  |
+    | `ETHX_KCP_000` | 小键盘数字：000 |
+    | `ETHX_KCP_0`   | 小键盘数字：0   |
+    | `ETHX_KCP_1`   | 小键盘数字：1   |
+    | `ETHX_KCP_2`   | 小键盘数字：2   |
+    | `ETHX_KCP_3`   | 小键盘数字：3   |
+    | `ETHX_KCP_4`   | 小键盘数字：4   |
+    | `ETHX_KCP_5`   | 小键盘数字：5   |
+    | `ETHX_KCP_6`   | 小键盘数字：6   |
+    | `ETHX_KCP_7`   | 小键盘数字：7   |
+    | `ETHX_KCP_8`   | 小键盘数字：8   |
+    | `ETHX_KCP_9`   | 小键盘数字：9   |
 + **相关内容：**
     - [enum ETHX_Event](#ETHX_Event)

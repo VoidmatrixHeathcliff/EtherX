@@ -1,8 +1,6 @@
 #ifndef _ETHERX_H_
 #define _ETHERX_H_
 
-#define ETHERX_IMPLEMENTATION
-
 /*****************************
 * 
 * EtherX - 基于 SDL2 的 EasyX 开源跨平台全套解决方案
@@ -26,7 +24,7 @@
 typedef uint8_t Uint8;
 typedef uint32_t Uint32;
 
-typedef struct ETHX_Sprite ETHX_Sprite;
+typedef struct ETHX_Image ETHX_Image;
 typedef struct ETHX_Font ETHX_Font;
 typedef struct ETHX_Music ETHX_Music;
 typedef struct ETHX_Sound ETHX_Sound;
@@ -47,11 +45,11 @@ enum ETHX_WindowStyle
 	ETHX_WINDOW_MINIMIZED = 0x00000040,
 };
 
-enum ETHX_SpriteStyle
+enum ETHX_ImageStyle
 {
-	ETHX_SPRITE_FLIP_NONE = 0x00000000,
-	ETHX_SPRITE_FLIP_H = 0x00000001,
-	ETHX_SPRITE_FLIP_V = 0x00000002,
+	ETHX_IMAGE_FLIP_NONE = 0x00000000,
+	ETHX_IMAGE_FLIP_H = 0x00000001,
+	ETHX_IMAGE_FLIP_V = 0x00000002,
 };
 
 enum ETHX_FontStyle
@@ -304,21 +302,21 @@ ETHX_API void ETHX_SetWindowFullscreen(bool flag);
 ETHX_API void ETHX_SetWindowSize(int width, int height);
 ETHX_API void ETHX_GetWindowSize(int& width, int& height);
 ETHX_API void ETHX_GetWindowSize_HDPI(int& width, int& height);
-ETHX_API void ETHX_SetWindowIcon(ETHX_Sprite* sprite);
+ETHX_API void ETHX_SetWindowIcon(ETHX_Image* image);
 ETHX_API void ETHX_ClearWindow();
 ETHX_API void ETHX_UpdateWindow();
 
 // Graphic API
-ETHX_API ETHX_Sprite* ETHX_LoadSprite(const std::string& path);
-ETHX_API ETHX_Sprite* ETHX_LoadSprite(void* data, size_t size);
-ETHX_API void ETHX_SetSpriteColorKey(ETHX_Sprite* sprite, const ETHX_Color& color, bool flag);
-ETHX_API void ETHX_SetSpriteAplha(ETHX_Sprite* sprite, Uint8 alpha);
-ETHX_API void ETHX_GetSpriteSize(ETHX_Sprite* sprite, int& width, int& height);
-ETHX_API void ETHX_DrawSprite(ETHX_Sprite* sprite, const ETHX_Point& pos);
-ETHX_API void ETHX_DrawSprite(ETHX_Sprite* sprite, const ETHX_Rect& show_rect);
-ETHX_API void ETHX_DrawSprite(ETHX_Sprite* sprite, const ETHX_Rect& show_rect, const ETHX_Rect& clip_rect);
-ETHX_API void ETHX_DrawSprite(ETHX_Sprite* sprite, const ETHX_Rect& show_rect, 
-	const ETHX_Rect& clip_rect, const ETHX_Point& center, double angle, ETHX_SpriteStyle style = ETHX_SPRITE_FLIP_NONE);
+ETHX_API ETHX_Image* ETHX_LoadImage(const std::string& path);
+ETHX_API ETHX_Image* ETHX_LoadImage(void* data, size_t size);
+ETHX_API void ETHX_SetImageColorKey(ETHX_Image* image, const ETHX_Color& color, bool flag);
+ETHX_API void ETHX_SetImageAplha(ETHX_Image* image, Uint8 alpha);
+ETHX_API void ETHX_GetImageSize(ETHX_Image* image, int& width, int& height);
+ETHX_API void ETHX_DrawImage(ETHX_Image* image, const ETHX_Point& pos);
+ETHX_API void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect);
+ETHX_API void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect, const ETHX_Rect& clip_rect);
+ETHX_API void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect, 
+	const ETHX_Rect& clip_rect, const ETHX_Point& center, double angle, ETHX_ImageStyle style = ETHX_IMAGE_FLIP_NONE);
 ETHX_API void ETHX_SetDrawColor(const ETHX_Color& color);
 ETHX_API ETHX_Color ETHX_GetDrawColor();
 ETHX_API void ETHX_DrawPoint(const ETHX_Point& point);
@@ -337,7 +335,7 @@ ETHX_API int ETHX_GetFontStyle(ETHX_Font* font);
 ETHX_API void ETHX_GetTextSize(ETHX_Font* font, const std::string& text, int& width, int& height);
 ETHX_API void ETHX_DrawText(ETHX_Font* font, const std::string& text, const ETHX_Point& pos);
 ETHX_API void ETHX_DrawText(ETHX_Font* font, const std::string& text, const ETHX_Rect& show_rect);
-ETHX_API ETHX_Sprite* ETHX_CreateTextSprite(ETHX_Font* font, const std::string& text);
+ETHX_API ETHX_Image* ETHX_CreateTextImage(ETHX_Font* font, const std::string& text);
 
 // Media API
 ETHX_API ETHX_Music* ETHX_LoadMusic(const std::string& path);
@@ -369,11 +367,11 @@ ETHX_API Uint32 ETHX_GetInitTime();
 #include <SDL_ttf.h>
 #include <SDL2_gfxPrimitives.h>
 
-struct ETHX_Sprite
+struct ETHX_Image
 {
 	SDL_Surface* _pSurface;
 	SDL_Texture* _pTexture;
-	~ETHX_Sprite()
+	~ETHX_Image()
 	{
 		SDL_FreeSurface(_pSurface); _pSurface = nullptr;
 		SDL_DestroyTexture(_pTexture); _pTexture = nullptr;
@@ -516,9 +514,9 @@ void ETHX_GetWindowSize_HDPI(int& width, int& height)
 	SDL_GetRendererOutputSize(_pWRenderer, &width, &height);
 }
 
-void ETHX_SetWindowIcon(ETHX_Sprite* sprite)
+void ETHX_SetWindowIcon(ETHX_Image* image)
 {
-	SDL_SetWindowIcon(_pWindow, sprite->_pSurface);
+	SDL_SetWindowIcon(_pWindow, image->_pSurface);
 }
 
 void ETHX_ClearWindow()
@@ -539,116 +537,116 @@ void ETHX_UpdateWindow()
 * *****************************************
 */
 
-inline bool _check_sprite_is_valid(ETHX_Sprite* sprite);
+inline bool _check_image_is_valid(ETHX_Image* image);
 inline bool _check_font_is_valid(ETHX_Font* font);
 
-ETHX_Sprite* ETHX_LoadSprite(const std::string& path)
+ETHX_Image* ETHX_LoadImage(const std::string& path)
 {
-	ETHX_Sprite* _sprite = new ETHX_Sprite();
+	ETHX_Image* _image = new ETHX_Image();
 
-	if (!(_sprite->_pSurface = IMG_Load(path.c_str())))
+	if (!(_image->_pSurface = IMG_Load(path.c_str())))
 	{
-		delete _sprite; _sprite = nullptr;
+		delete _image; _image = nullptr;
 		return nullptr;
 	}
 
-	if (!(_sprite->_pTexture = SDL_CreateTextureFromSurface(_pWRenderer, _sprite->_pSurface)))
+	if (!(_image->_pTexture = SDL_CreateTextureFromSurface(_pWRenderer, _image->_pSurface)))
 	{
-		SDL_FreeSurface(_sprite->_pSurface); _sprite->_pSurface = nullptr;
-		delete _sprite; _sprite = nullptr;
+		SDL_FreeSurface(_image->_pSurface); _image->_pSurface = nullptr;
+		delete _image; _image = nullptr;
 		return nullptr;
 	}
 
-	return _sprite;
+	return _image;
 }
 
-ETHX_Sprite* ETHX_LoadSprite(void* data, size_t size)
+ETHX_Image* ETHX_LoadImage(void* data, size_t size)
 {
-	ETHX_Sprite* _sprite = new ETHX_Sprite();
+	ETHX_Image* _image = new ETHX_Image();
 
-	if (!(_sprite->_pSurface = IMG_Load_RW(SDL_RWFromMem(data, size), 1)))
+	if (!(_image->_pSurface = IMG_Load_RW(SDL_RWFromMem(data, size), 1)))
 	{
-		delete _sprite; _sprite = nullptr;
+		delete _image; _image = nullptr;
 		return nullptr;
 	}
 
-	if (!(_sprite->_pTexture = SDL_CreateTextureFromSurface(_pWRenderer, _sprite->_pSurface)))
+	if (!(_image->_pTexture = SDL_CreateTextureFromSurface(_pWRenderer, _image->_pSurface)))
 	{
-		SDL_FreeSurface(_sprite->_pSurface); _sprite->_pSurface = nullptr;
-		delete _sprite; _sprite = nullptr;
+		SDL_FreeSurface(_image->_pSurface); _image->_pSurface = nullptr;
+		delete _image; _image = nullptr;
 		return nullptr;
 	}
 
-	return _sprite;
+	return _image;
 }
 
-inline bool _check_sprite_is_valid(ETHX_Sprite* sprite)
+inline bool _check_image_is_valid(ETHX_Image* image)
 {
 	// maybe assert something here
 
-	return sprite;
+	return image;
 }
 
-void ETHX_SetSpriteColorKey(ETHX_Sprite* sprite, const ETHX_Color& color, bool flag)
+void ETHX_SetImageColorKey(ETHX_Image* image, const ETHX_Color& color, bool flag)
 {
-	if (!_check_sprite_is_valid(sprite)) return;
+	if (!_check_image_is_valid(image)) return;
 
-	SDL_SetColorKey(sprite->_pSurface, flag, 
-		SDL_MapRGBA(sprite->_pSurface->format, color.r, color.g, color.b, color.a));
-	SDL_DestroyTexture(sprite->_pTexture); sprite->_pTexture = nullptr;
-	sprite->_pTexture = SDL_CreateTextureFromSurface(_pWRenderer, sprite->_pSurface);
+	SDL_SetColorKey(image->_pSurface, flag, 
+		SDL_MapRGBA(image->_pSurface->format, color.r, color.g, color.b, color.a));
+	SDL_DestroyTexture(image->_pTexture); image->_pTexture = nullptr;
+	image->_pTexture = SDL_CreateTextureFromSurface(_pWRenderer, image->_pSurface);
 }
 
-void ETHX_SetSpriteAplha(ETHX_Sprite* sprite, Uint8 alpha)
+void ETHX_SetImageAplha(ETHX_Image* image, Uint8 alpha)
 {
-	if (!_check_sprite_is_valid(sprite)) return;
+	if (!_check_image_is_valid(image)) return;
 
-	SDL_SetTextureBlendMode(sprite->_pTexture, SDL_BLENDMODE_BLEND);
-	SDL_SetTextureAlphaMod(sprite->_pTexture, alpha);
+	SDL_SetTextureBlendMode(image->_pTexture, SDL_BLENDMODE_BLEND);
+	SDL_SetTextureAlphaMod(image->_pTexture, alpha);
 }
 
-void ETHX_GetSpriteSize(ETHX_Sprite* sprite, int& width, int& height)
+void ETHX_GetImageSize(ETHX_Image* image, int& width, int& height)
 {
-	if (!_check_sprite_is_valid(sprite)) return;
+	if (!_check_image_is_valid(image)) return;
 
-	width = sprite->_pSurface->w;
-	height = sprite->_pSurface->h;
+	width = image->_pSurface->w;
+	height = image->_pSurface->h;
 }
 
-void ETHX_DrawSprite(ETHX_Sprite* sprite, const ETHX_Point& pos)
+void ETHX_DrawImage(ETHX_Image* image, const ETHX_Point& pos)
 {
-	if (!_check_sprite_is_valid(sprite)) return;
+	if (!_check_image_is_valid(image)) return;
 
-	SDL_Rect _dst_rect = { pos.x, pos.y, sprite->_pSurface->w, sprite->_pSurface->h };
-	SDL_RenderCopy(_pWRenderer, sprite->_pTexture, nullptr, &_dst_rect);
+	SDL_Rect _dst_rect = { pos.x, pos.y, image->_pSurface->w, image->_pSurface->h };
+	SDL_RenderCopy(_pWRenderer, image->_pTexture, nullptr, &_dst_rect);
 }
 
-void ETHX_DrawSprite(ETHX_Sprite* sprite, const ETHX_Rect& show_rect)
+void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect)
 {
-	if (!_check_sprite_is_valid(sprite)) return;
+	if (!_check_image_is_valid(image)) return;
 
 	SDL_Rect _dst_rect = { show_rect.x, show_rect.y, show_rect.w, show_rect.h };
-	SDL_RenderCopy(_pWRenderer, sprite->_pTexture, nullptr, &_dst_rect);
+	SDL_RenderCopy(_pWRenderer, image->_pTexture, nullptr, &_dst_rect);
 }
 
-void ETHX_DrawSprite(ETHX_Sprite* sprite, const ETHX_Rect& show_rect, const ETHX_Rect& clip_rect)
+void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect, const ETHX_Rect& clip_rect)
 {
-	if (!_check_sprite_is_valid(sprite)) return;
+	if (!_check_image_is_valid(image)) return;
 
 	SDL_Rect _dst_rect = { show_rect.x, show_rect.y, show_rect.w, show_rect.h };
 	SDL_Rect _src_rect = { clip_rect.x, clip_rect.y, clip_rect.w, clip_rect.h };
-	SDL_RenderCopy(_pWRenderer, sprite->_pTexture, &_src_rect, &_dst_rect);
+	SDL_RenderCopy(_pWRenderer, image->_pTexture, &_src_rect, &_dst_rect);
 }
 
-void ETHX_DrawSprite(ETHX_Sprite* sprite, const ETHX_Rect& show_rect, 
-	const ETHX_Rect& clip_rect, const ETHX_Point& center, double angle, ETHX_SpriteStyle style)
+void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect, 
+	const ETHX_Rect& clip_rect, const ETHX_Point& center, double angle, ETHX_ImageStyle style)
 {
-	if (!_check_sprite_is_valid(sprite)) return;
+	if (!_check_image_is_valid(image)) return;
 
 	SDL_Rect _dst_rect = { show_rect.x, show_rect.y, show_rect.w, show_rect.h };
 	SDL_Rect _src_rect = { clip_rect.x, clip_rect.y, clip_rect.w, clip_rect.h };
 	SDL_Point _flip_center = { center.x, center.y };
-	SDL_RenderCopyEx(_pWRenderer, sprite->_pTexture, &_src_rect, &_dst_rect, 
+	SDL_RenderCopyEx(_pWRenderer, image->_pTexture, &_src_rect, &_dst_rect, 
 		angle, &_flip_center, (SDL_RendererFlip)style);
 }
 
@@ -798,51 +796,51 @@ void ETHX_DrawText(ETHX_Font* font, const std::string& text, const ETHX_Point& p
 {
 	if (!_check_font_is_valid(font)) return;
 
-	ETHX_Sprite* _sprite = nullptr;
+	ETHX_Image* _image = nullptr;
 
-	if (!(_sprite = ETHX_CreateTextSprite(font, text))) return;
+	if (!(_image = ETHX_CreateTextImage(font, text))) return;
 
-	ETHX_Rect _rect = { pos.x, pos.y, _sprite->_pSurface->w, _sprite->_pSurface->h };
-	ETHX_DrawSprite(_sprite, _rect);
+	ETHX_Rect _rect = { pos.x, pos.y, _image->_pSurface->w, _image->_pSurface->h };
+	ETHX_DrawImage(_image, _rect);
 
-	delete _sprite; _sprite = nullptr;
+	delete _image; _image = nullptr;
 }
 
 void ETHX_DrawText(ETHX_Font* font, const std::string& text, const ETHX_Rect& show_rect)
 {
 	if (!_check_font_is_valid(font)) return;
 
-	ETHX_Sprite* _sprite = nullptr;
-	if (!(_sprite = ETHX_CreateTextSprite(font, text))) return;
+	ETHX_Image* _image = nullptr;
+	if (!(_image = ETHX_CreateTextImage(font, text))) return;
 
-	ETHX_DrawSprite(_sprite, show_rect);
+	ETHX_DrawImage(_image, show_rect);
 
-	delete _sprite; _sprite = nullptr;
+	delete _image; _image = nullptr;
 }
 
-ETHX_Sprite* ETHX_CreateTextSprite(ETHX_Font* font, const std::string& text)
+ETHX_Image* ETHX_CreateTextImage(ETHX_Font* font, const std::string& text)
 {
 	if (!_check_font_is_valid(font)) return nullptr;
 
-	ETHX_Sprite* _sprite = new ETHX_Sprite();
+	ETHX_Image* _image = new ETHX_Image();
 
 	SDL_Color _color;
 	SDL_GetRenderDrawColor(_pWRenderer, &(_color.r), &(_color.g), &(_color.b), &(_color.a));
 
-	if (!(_sprite->_pSurface = TTF_RenderUTF8_Blended(font->_pFont, text.c_str(), _color)))
+	if (!(_image->_pSurface = TTF_RenderUTF8_Blended(font->_pFont, text.c_str(), _color)))
 	{
-		delete _sprite; _sprite = nullptr;
+		delete _image; _image = nullptr;
 		return nullptr;
 	}
 
-	if (!(_sprite->_pTexture = SDL_CreateTextureFromSurface(_pWRenderer, _sprite->_pSurface)))
+	if (!(_image->_pTexture = SDL_CreateTextureFromSurface(_pWRenderer, _image->_pSurface)))
 	{
-		SDL_FreeSurface(_sprite->_pSurface); _sprite->_pSurface = nullptr;
-		delete _sprite; _sprite = nullptr;
+		SDL_FreeSurface(_image->_pSurface); _image->_pSurface = nullptr;
+		delete _image; _image = nullptr;
 		return nullptr;
 	}
 
-	return _sprite;
+	return _image;
 }
 
 /*
