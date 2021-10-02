@@ -20,7 +20,7 @@
 | [struct ETHX_Sound](#ETHX_Sound)                   | 用以描述音效对象         |
 | [enum ETHX_MessageBoxStyle](#ETHX_MessageBoxStyle) | 用以描述消息提示框样式   |
 | [enum ETHX_WindowStyle](#ETHX_WindowStyle)         | 用以描述窗口样式         |
-| [enum ETHX_ImageStyle](#ETHX_ImageStyle)           | 以描述图片对象翻转样式   |
+| [enum ETHX_ImageStyle](#ETHX_ImageStyle)           | 以描述图像对象翻转样式   |
 | [enum ETHX_FontStyle](#ETHX_FontStyle)             | 用以描述字体样式         |
 | [enum ETHX_EventType](#ETHX_EventType)             | 用以描述事件类型         |
 | [enum ETHX_KeyCode](#ETHX_KeyCode)                 | 用以描述键盘按键键码     |
@@ -30,21 +30,21 @@
 <details>
     <summary>🖥 窗口控制相关函数</summary>
 
-| 函数名                                                      | 简介                     |
-|:------------------------------------------------------------|:-------------------------|
-| [ETHX_InitWindow()](#ETHX_InitWindow)                       | 用以描述 EtherX 中的颜色 |
-| [ETHX_QuitWindow()](#ETHX_QuitWindow)                       | 用以描述矩形位置和大小   |
-| [ETHX_ShowMessageBox()](#ETHX_ShowMessageBox)               | 用以描述点的位置         |
-| [ETHX_ShowConfirmMessageBox()](#ETHX_ShowConfirmMessageBox) | 用以描述交互事件         |
-| [ETHX_SetWindowTitle()](#ETHX_SetWindowTitle)               | 用以描述图像对象         |
-| [ETHX_GetWindowTitle()](#ETHX_GetWindowTitle)               | 用以描述字体对象         |
-| [ETHX_SetWindowFullscreen()](#ETHX_SetWindowFullscreen)     | 用以描述音乐对象         |
-| [ETHX_SetWindowSize()](#ETHX_SetWindowSize)                 | 用以描述音效对象         |
-| [ETHX_GetWindowSize()](#ETHX_GetWindowSize)                 | 用以描述消息提示框样式   |
-| [ETHX_GetWindowSize_HDPI()](#ETHX_GetWindowSize_HDPI)       | 用以描述窗口样式         |
-| [ETHX_SetWindowIcon()](#ETHX_SetWindowIcon)                 | 以描述图片对象翻转样式   |
-| [ETHX_ClearWindow()](#ETHX_ClearWindow)                     | 用以描述字体样式         |
-| [ETHX_UpdateWindow()](#ETHX_UpdateWindow)                   | 用以描述事件类型         |
+| 函数名                                                      | 简介                         |
+|:------------------------------------------------------------|:-----------------------------|
+| [ETHX_InitWindow()](#ETHX_InitWindow)                       | 初始化 EtherX 并创建窗口     |
+| [ETHX_QuitWindow()](#ETHX_QuitWindow)                       | 退出 EtherX 并关闭窗口       |
+| [ETHX_ShowMessageBox()](#ETHX_ShowMessageBox)               | 显示信息提示框               |
+| [ETHX_ShowConfirmMessageBox()](#ETHX_ShowConfirmMessageBox) | 显示信息提示确认窗口         |
+| [ETHX_SetWindowTitle()](#ETHX_SetWindowTitle)               | 重新设置窗口标题             |
+| [ETHX_GetWindowTitle()](#ETHX_GetWindowTitle)               | 获取窗口标题                 |
+| [ETHX_SetWindowFullscreen()](#ETHX_SetWindowFullscreen)     | 设置窗口是否全屏             |
+| [ETHX_SetWindowSize()](#ETHX_SetWindowSize)                 | 设置窗口大小                 |
+| [ETHX_GetWindowSize()](#ETHX_GetWindowSize)                 | 获取窗口大小                 |
+| [ETHX_GetWindowSize_HDPI()](#ETHX_GetWindowSize_HDPI)       | 获取高分辨率下窗口的实际大小 |
+| [ETHX_SetWindowIcon()](#ETHX_SetWindowIcon)                 | 设置窗口图标                 |
+| [ETHX_ClearWindow()](#ETHX_ClearWindow)                     | 清空窗口内容                 |
+| [ETHX_UpdateWindow()](#ETHX_UpdateWindow)                   | 刷新窗口                     |
 
 </details>
 
@@ -62,6 +62,14 @@
 
 <details>
     <summary>⏲ 时间控制相关函数</summary>
+</details>
+
+<details>
+    <summary>📌 附加内容</summary>
+
++ [窗口坐标系](#window-coordinate-system)
++ [图像坐标系](#image-coordinate-system)
+
 </details>
 
 ## 详细介绍
@@ -95,6 +103,7 @@
 + **相关内容：**
     - [ETHX_DrawRectangle()](#ETHX_DrawRectangle)
     - [ETHX_DrawImage()](#ETHX_DrawImage)
+    - [附加内容：窗口坐标系](#window-coordinate-system)
 
 ***
 
@@ -108,6 +117,7 @@
     | `int y` | 点在窗口坐标系下坐标的 y 分量 |
 + **相关内容：**
     - [ETHX_DrawPoint()](#ETHX_DrawPoint)
+    - [附加内容：窗口坐标系](#window-coordinate-system)
 
 ***
 
@@ -141,6 +151,7 @@
     - [enum ETHX_EventType](#ETHX_EventType)
     - [enum ETHX_KeyCode](#ETHX_KeyCode)
     - [ETHX_UpdateEvent()](#ETHX_UpdateEvent)
+    - [附加内容：窗口坐标系](#window-coordinate-system)
 
 ***
 
@@ -221,13 +232,13 @@
 
 <a id="ETHX_ImageStyle"></a>
 ### enum ETHX_ImageStyle
-+ **功能：** 用以描述图片对象翻转样式
++ **功能：** 用以描述图像对象翻转样式
 + **成员及简介：**
     | 成员                   | 简介         |
     |:-----------------------|:-------------|
-    | `ETHX_IMAGE_FLIP_NONE` | 图片无翻转   |
-    | `ETHX_IMAGE_FLIP_H`    | 图片水平翻转 |
-    | `ETHX_IMAGE_FLIP_V`    | 图片竖直翻转 |
+    | `ETHX_IMAGE_FLIP_NONE` | 图像无翻转   |
+    | `ETHX_IMAGE_FLIP_H`    | 图像水平翻转 |
+    | `ETHX_IMAGE_FLIP_V`    | 图像竖直翻转 |
 + **相关内容：**
     - [ETHX_DrawImage()](#ETHX_DrawImage)
 
@@ -376,19 +387,23 @@ ETHX_KeyCode 结构体仅表示键码表，部分字符可能无法通过物理�
         void ETHX_InitWindow(const std::string& title, int width, int height, ETHX_WindowStyle style = ETHX_WINDOW_DEFAULT);
     ```
 + **参数简介：**
-    | 参数     | 简介     |
-    |:---------|:---------|
-    | `title`  | 窗口标题 |
-    | `width`  | 窗口宽度 |
-    | `height` | 窗口高度 |
-    | `style`  | 窗口样式 |
+    | 参数     | 简介                                   |
+    |:---------|:---------------------------------------|
+    | `title`  | 窗口标题                               |
+    | `width`  | 窗口宽度                               |
+    | `height` | 窗口高度                               |
+    | `style`  | 窗口样式，默认为有边框且大小固定的窗口 |
 + **返回值简介：** 无
 + **备注：**  
 ETHX_InitWindow 用以初始化 EtherX 内部组件，必须在调用其他 EtherX 函数前调用
 + **代码示例：**
     ```c++
-        // 创建一个标题为 HelloWorld 的尺寸为 1280x720 的大小可变窗口
-        ETHX_InitWindow("HelloWorld", 1280, 720, ETHX_WINDOW_RESIZABLE);
+        // 创建一个标题为 HelloWorld 的尺寸为 1280x720 的大小可变并且默认最大化的窗口
+        ETHX_InitWindow(
+            "HelloWorld",
+            1280, 720,
+            ETHX_WINDOW_RESIZABLE | ETHX_WINDOW_MAXIMIZED
+        );
     ```
 + **相关内容：**
     - [enum ETHX_WindowStyle](#ETHX_WindowStyle)
@@ -438,13 +453,13 @@ ETHX_InitWindow 用以初始化 EtherX 内部组件，必须在调用其他 Ethe
     bool ETHX_ShowConfirmMessageBox(const std::string& title, const std::string& msg, ETHX_MessageBoxStyle style, std::string& ok_text = "OK", const std::string& cancel_text = "Cancel");
     ```
 + **参数简介：** 
-    | 参数          | 简介           |
-    |:--------------|:---------------|
-    | `title`       | 信息提示框标题 |
-    | `msg`         | 信息提示框内容 |
-    | `style`       | 信息提示框样式 |
-    | `ok_text`     | 确认按钮文本   |
-    | `cancel_text` | 取消按钮文本   |
+    | 参数          | 简介                          |
+    |:--------------|:------------------------------|
+    | `title`       | 信息提示框标题                |
+    | `msg`         | 信息提示框内容                |
+    | `style`       | 信息提示框样式                |
+    | `ok_text`     | 确认按钮文本，默认为 `OK`     |
+    | `cancel_text` | 取消按钮文本，默认为 `Cancel` |
 + **返回值简介：** 用户点击确认按钮返回 `true`，反之返回 `false`
 + **代码示例：**
     ```c++
@@ -462,16 +477,349 @@ ETHX_InitWindow 用以初始化 EtherX 内部组件，必须在调用其他 Ethe
 
 <a id="ETHX_SetWindowTitle"></a>
 ### ETHX_SetWindowTitle()
-+ **功能：** 设置窗口标题
++ **功能：** 重新设置窗口标题
 + **函数原型：**
     ```c++
     void ETHX_SetWindowTitle(std::string title);
     ```
 + **参数简介：** 
-    | 参数    | 简介     |
-    |:--------|:---------|
-    | `title` | 窗口标题 |
+    | 参数    | 简介         |
+    |:--------|:-------------|
+    | `title` | 新的窗口标题 |
 + **返回值简介：** 无
 + **相关内容：**
     - [ETHX_InitWindow()](#ETHX_InitWindow)
     - [ETHX_GetWindowTitle()](#ETHX_GetWindowTitle)
+
+***
+
+<a id="ETHX_GetWindowTitle"></a>
+### ETHX_GetWindowTitle()
++ **功能：** 获取窗口标题
++ **函数原型：**
+    ```c++
+    std::string ETHX_GetWindowTitle();
+    ```
++ **参数简介：** 无
++ **返回值简介：** 窗口当前标题
++ **相关内容：**
+    - [ETHX_InitWindow()](#ETHX_InitWindow)
+    - [ETHX_SetWindowTitle()](#ETHX_SetWindowTitle)
+
+***
+
+<a id="ETHX_SetWindowFullscreen"></a>
+### ETHX_SetWindowFullscreen()
++ **功能：** 设置窗口是否全屏
++ **函数原型：**
+    ```c++
+    ETHX_SetWindowFullscreen(bool flag);
+    ```
++ **参数简介：** 
+    | 参数   | 简介     |
+    |:-------|:---------|
+    | `flag` | 是否全屏 |
++ **返回值简介：** 无
++ **相关内容：**
+    - [ETHX_InitWindow()](#ETHX_InitWindow)
+
+***
+
+<a id="ETHX_SetWindowSize"></a>
+### ETHX_SetWindowSize()
++ **功能：** 设置窗口大小
++ **函数原型：**
+    ```c++
+    void ETHX_SetWindowSize(int width, int height);
+    ```
++ **参数简介：** 
+    | 参数     | 简介     |
+    |:---------|:---------|
+    | `width`  | 窗口宽度 |
+    | `height` | 窗口高度 |
++ **返回值简介：** 无
++ **相关内容：**
+    - [ETHX_InitWindow()](#ETHX_InitWindow)
+    - [ETHX_GetWindowSize()](#ETHX_GetWindowSize)
+
+***
+
+<a id="ETHX_GetWindowSize"></a>
+### ETHX_GetWindowSize()
++ **功能：** 获取窗口大小
++ **函数原型：**
+    ```c++
+    void ETHX_GetWindowSize(int& width, int& height);
+    ```
++ **参数简介：** 
+    | 参数     | 简介     |
+    |:---------|:---------|
+    | `width`  | 窗口宽度 |
+    | `height` | 窗口高度 |
++ **返回值简介：** 无
++ **代码示例：**
+    ```c++
+    int width, height;
+    ETHX_GetWindowSize(width, height);
+    std::cout << "width: " << width << " height: " << height << std::endl;
+    ```
++ **相关内容：**
+    - [ETHX_GetWindowSize()](#ETHX_GetWindowSize)
+    - [ETHX_GetWindowSize_HDPI()](#ETHX_GetWindowSize_HDPI)
+
+***
+
+<a id="ETHX_GetWindowSize_HDPI"></a>
+### ETHX_GetWindowSize()
++ **功能：** 获取高分辨率下窗口的实际大小
++ **函数原型：**
+    ```c++
+    void ETHX_GetWindowSize_HDPI(int& width, int& height);
+    ```
++ **参数简介：** 
+    | 参数     | 简介     |
+    |:---------|:---------|
+    | `width`  | 窗口宽度 |
+    | `height` | 窗口高度 |
++ **返回值简介：** 无
++ **备注：**  
+由于高分辨率的存在，在某些设备上使用 ETHX_GetWindowSize_HDPI 函数获取到的尺寸为实际可绘图尺寸
++ **代码示例：**
+    ```c++
+    int width, height;
+    ETHX_GetWindowSize(width, height);
+    std::cout << "Actually Drawable Size:" << std::endl;
+    std::cout << "width: " << width << " height: " << height << std::endl;
+    ```
++ **相关内容：**
+    - [ETHX_GetWindowSize()](#ETHX_GetWindowSize)
+
+***
+
+<a id="ETHX_SetWindowIcon"></a>
+### ETHX_SetWindowIcon()
++ **功能：** 设置窗口图标
++ **函数原型：**
+    ```c++
+    void ETHX_SetWindowIcon(ETHX_Image* image);
+    ```
++ **参数简介：** 
+    | 参数    | 简介             |
+    |:--------|:-----------------|
+    | `image` | 窗口图标图像对象 |
++ **返回值简介：** 无
++ **相关内容：**
+    - [ETHX_LoadImage()](#ETHX_LoadImage)
+
+***
+
+<a id="ETHX_ClearWindow"></a>
+### ETHX_ClearWindow()
++ **功能：** 清空窗口内容
++ **函数原型：**
+    ```c++
+    void ETHX_ClearWindow();
+    ```
++ **参数简介：** 无
++ **返回值简介：** 无
++ **相关内容：**
+    - [ETHX_UpdateWindow()](#ETHX_UpdateWindow)
+
+***
+
+<a id="ETHX_UpdateWindow"></a>
+### ETHX_UpdateWindow()
++ **功能：** 刷新窗口
++ **函数原型：**
+    ```c++
+    void ETHX_UpdateWindow();
+    ```
++ **参数简介：** 无
++ **返回值简介：** 无
++ **备注：**  
+EtherX 所有的窗口绘图操作都在渲染缓冲区中进行，只有调用 ETHX_UpdateWindow 函数后才会将先前的绘制操作实际刷新到屏幕上
+
+***
+
+<a id="ETHX_LoadImage"></a>
+### ETHX_LoadImage()
++ **功能：** 加载图像对象
++ **函数原型：**
+    - 原型 1：
+        ```c++
+        ETHX_Image* ETHX_LoadImage(const std::string& path);
+        ```
+        + **参数简介：**  
+            | 参数   | 简介         |
+            |:-------|:-------------|
+            | `path` | 图像文件路径 |
+        + **返回值简介：** 图像对象指针，加载失败则返回 `nullptr`
+    - 原型 2：
+        ```c++
+        ETHX_API ETHX_Image* ETHX_LoadImage(void* data, size_t size);
+        ```
+        + **参数简介：**  
+            | 参数   | 简介                   |
+            |:-------|:-----------------------|
+            | `data` | 存储图像数据的内存指针 |
+            | `size` | 图像数据大小           |
+        + **返回值简介：** 图像对象指针，加载失败则返回 `nullptr`
++ **备注：**  
+图像对象指针可以直接使用 `delete` 销毁内存
++ **代码示例：**
+    ```c++
+    ETHX_Image* pImage;
+    // 检查是否加载成功，若失败则输出提示信息
+    if (!(pImage = ETHX_LoadImage("Hello.png")))
+        std::cout << "Load Image Error !" << std::endl;
+    // 销毁图像对象内存
+    delete pImage; pImage = nullptr;
+    ```
++ **相关内容：**
+    - [struct ETHX_Image](#ETHX_Image)
+    - [ETHX_DrawImage()](#ETHX_DrawImage)
+
+***
+
+<a id="ETHX_SetImageColorKey"></a>
+### ETHX_SetImageColorKey()
++ **功能：** 设置图像对象指定的透明颜色是否启用
++ **函数原型：**
+    ```c++
+    void ETHX_SetImageColorKey(ETHX_Image* image, const ETHX_Color& color, bool flag);
+    ```
++ **参数简介：**  
+    | 参数    | 简介         |
+    |:--------|:-------------|
+    | `image` | 图像对象     |
+    | `color` | 指定颜色     |
+    | `bool`  | 是否启用透明 |
++ **返回值简介：** 无
++ **备注：**  
+启用后的指定颜色将变为完全透明，常用于抠除不支持透明通道的图像格式（如：JPG）图像的指定颜色部分
++ **相关内容：**
+    - [struct ETHX_Image](#ETHX_Image)
+    - [ETHX_SetImageAplha()](#ETHX_SetImageAplha)
+
+***
+
+<a id="ETHX_SetImageAplha"></a>
+### ETHX_SetImageAplha()
++ **功能：** 设置图像透明度
++ **函数原型：**
+    ```c++
+    void ETHX_SetImageAplha(ETHX_Image* image, Uint8 alpha);
+    ```
++ **参数简介：**  
+    | 参数    | 简介                     |
+    |:--------|:-------------------------|
+    | `image` | 图像对象                 |
+    | `alpha` | 透明度，取值范围为 0~255 |
++ **返回值简介：** 无
++ **相关内容：**
+    - [struct ETHX_Image](#ETHX_Image)
+    - [ETHX_SetImageColorKey()](#ETHX_SetImageColorKey)
+
+***
+
+<a id="ETHX_GetImageSize"></a>
+### ETHX_GetImageSize()
++ **功能：** 获取图像尺寸
++ **函数原型：**
+    ```c++
+    void ETHX_GetImageSize(ETHX_Image* image, int& width, int& height);
+    ```
++ **参数简介：**  
+    | 参数     | 简介     |
+    |:---------|:---------|
+    | `image`  | 图像对象 |
+    | `width`  | 图像宽度 |
+    | `height` | 图像高度 |
++ **返回值简介：** 无
++ **代码示例：**
+    ```c++
+    // ETHX_Image* pImage = ...
+
+    int width, height;
+    ETHX_GetImageSize(pImage, width, height);
+    std::cout << "width: " << width << " height: " << height << std::endl;
+    ```
++ **相关内容：**
+    - [struct ETHX_Image](#ETHX_Image)
+
+***
+
+<a id="ETHX_DrawImage"></a>
+### ETHX_DrawImage()
++ **功能：** 绘制图像
++ **函数原型：**
+    - 原型 1：
+        ```c++
+        void ETHX_DrawImage(ETHX_Image* image, const ETHX_Point& pos);
+        ```
+        + **参数简介：**  
+            | 参数    | 简介                               |
+            |:--------|:-----------------------------------|
+            | `image` | 图像对象                           |
+            | `pos`   | 图像左上角顶点在屏幕坐标系下的位置 |
+        + **返回值简介：** 无
+    - 原型 2：
+        ```c++
+        void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect);
+        ```
+        + **参数简介：**  
+            | 参数        | 简介                         |
+            |:------------|:-----------------------------|
+            | `image`     | 图像对象                     |
+            | `show_rect` | 图像在屏幕坐标系下的显示区域 |
+        + **返回值简介：无
+    - 原型 3：
+        ```c++
+        void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect, const ETHX_Rect& clip_rect);
+        ```
+        + **参数简介：**  
+            | 参数        | 简介                         |
+            |:------------|:-----------------------------|
+            | `image`     | 图像对象                     |
+            | `show_rect` | 图像在屏幕坐标系下的显示区域 |
+            | `clip_rect` | 图像在图像坐标系下的裁剪区域 |
+        + **返回值简介：无
+    - 原型 4：
+        ```c++
+        ETHX_API void ETHX_DrawImage(ETHX_Image* image, const ETHX_Rect& show_rect, const ETHX_Rect& clip_rect, const ETHX_Point& center, double angle, ETHX_ImageStyle style = ETHX_IMAGE_FLIP_NONE);
+        ```
+        + **参数简介：**  
+            | 参数        | 简介                                         |
+            |:------------|:---------------------------------------------|
+            | `image`     | 图像对象                                     |
+            | `show_rect` | 图像在屏幕坐标系下的显示区域                 |
+            | `clip_rect` | 图像在图像坐标系下的裁剪区域                 |
+            | `center`    | 图像在图像坐标系下的旋转中心位置             |
+            | `angle`     | 图像在图像坐标系下的旋转角度，逆时针为正方向 |
+            | `style`     | 图像在图像坐标系下的翻转样式，默认为无翻转   |
+        + **返回值简介：无
++ **备注：**  
+ETHX_DrawImage 四个重载的应用场景总结：
+    | 参数   | 简介                                           |
+    |:-------|:-----------------------------------------------|
+    | 重载 1 | 仅需要设置图像显示位置、图像默认大小显示时使用 |
+    | 重载 2 | 需要对图像进行缩放显示时使用                   |
+    | 重载 3 | 需要对图像进行区域显示（裁剪）时使用           |
+    | 重载 4 | 需要对图像进行旋转或翻转显示时使用             |
++ **代码示例：**
+    ```c++
+    ETHX_Image* pImage;
+    // 检查是否加载成功，若失败则输出提示信息
+    if (!(pImage = ETHX_LoadImage("Hello.png")))
+        std::cout << "Load Image Error !" << std::endl;
+    // 销毁图像对象内存
+    delete pImage; pImage = nullptr;
+    ```
++ **相关内容：**
+    - [enum ETHX_ImageStyle](#ETHX_ImageStyle)
+    - [struct ETHX_Rect](#ETHX_Rect)
+    - [struct ETHX_Point](#ETHX_Point)
+    - [struct ETHX_Image](#ETHX_Image)
+    - [ETHX_DrawImage()](#ETHX_DrawImage)
+    - [附加内容：窗口坐标系](#window-coordinate-system)
+    - [附加内容：图像坐标系](#image-coordinate-system)
