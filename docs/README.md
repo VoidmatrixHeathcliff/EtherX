@@ -50,6 +50,30 @@
 
 <details>
     <summary>🖼 绘图相关函数</summary>
+
+| 函数名                                            | 简介                               |
+|:--------------------------------------------------|:-----------------------------------|
+| [ETHX_LoadImage()](#ETHX_LoadImage)               | 加载图像对象                       |
+| [ETHX_SetImageColorKey()](#ETHX_SetImageColorKey) | 设置图像对象指定的透明颜色是否启用 |
+| [ETHX_SetImageAplha()](#ETHX_SetImageAplha)       | 设置图像透明度                     |
+| [ETHX_GetImageSize()](#ETHX_GetImageSize)         | 获取图像尺寸                       |
+| [ETHX_DrawImage()](#ETHX_DrawImage)               | 绘制图像                           |
+| [ETHX_SetDrawColor()](#ETHX_SetDrawColor)         | 设置绘图颜色                       |
+| [ETHX_GetDrawColor()](#ETHX_GetDrawColor)         | 获取当前绘图颜色                   |
+| [ETHX_DrawPoint()](#ETHX_DrawPoint)               | 绘制点                             |
+| [ETHX_DrawLine()](#ETHX_DrawLine)                 | 绘制线段                           |
+| [ETHX_DrawRectangle()](#ETHX_DrawRectangle)       | 绘制矩形                           |
+| [ETHX_DrawCircle()](#ETHX_DrawCircle)             | 绘制圆                             |
+| [ETHX_DrawEllipse()](#ETHX_DrawEllipse)           | 绘制椭圆                           |
+| [ETHX_DrawTriangle()](#ETHX_DrawTriangle)         | 绘制扇形                           |
+| [ETHX_DrawPie()](#ETHX_DrawPie)                   | 绘制三角形                         |
+| [ETHX_LoadFont()](#ETHX_LoadFont)                 | 加载字体对象                       |
+| [ETHX_SetFontStyle()](#ETHX_SetFontStyle)         | 设置字体样式                       |
+| [ETHX_GetFontStyle()](#ETHX_GetFontStyle)         | 获取字体样式                       |
+| [ETHX_GetTextSize()](#ETHX_GetTextSize)           | 获取指定字体的文本尺寸             |
+| [ETHX_DrawText()](#ETHX_DrawText)                 | 绘制文本内容                       |
+| [ETHX_CreateTextImage()](#ETHX_CreateTextImage)   | 创建文本图像                       |
+
 </details>
 
 <details>
@@ -810,11 +834,10 @@ ETHX_DrawImage 四个重载的应用场景总结：
     ```c++
     // ETHX_Image* pImage = ...
 
+    // 将图像铺满窗口
     ETHX_Rect show_rect;
     show_rect.x = 0, show_rect.y = 0;
     ETHX_GetWindowSize(show_rect.w, show_rect.h);
-
-    // 将图片铺满窗口
     ETHX_DrawImage(pImage, show_rect);
     ```
 + **相关内容：**
@@ -947,11 +970,11 @@ ETHX_DrawImage 四个重载的应用场景总结：
     ```c++
     void ETHX_DrawCircle(const ETHX_Point& center, int radius, bool fill = false);
     ```
-+ **参数简介：  
-    | 参数    | 简介                   |
-    |:--------|:-----------------------|
-    | `center`   | 圆心在窗口坐标系下的位置 |
-    | `radius` | 圆的半径大小 |
++ **参数简介：**  
+    | 参数     | 简介                     |
+    |:---------|:-------------------------|
+    | `center` | 圆心在窗口坐标系下的位置 |
+    | `radius` | 圆的半径大小             |
     | `fill`   | 是否填充，默认为不填充   |
 + **返回值简介：** 无
 + **相关内容：**
@@ -966,13 +989,13 @@ ETHX_DrawImage 四个重载的应用场景总结：
     ```c++
     void ETHX_DrawEllipse(const ETHX_Point& center, int radius_x, int radius_y, bool fill = false);
     ```
-+ **参数简介：  
-    | 参数    | 简介                   |
-    |:--------|:-----------------------|
-    | `center`   | 椭圆圆心在窗口坐标系下的位置 |
++ **参数简介：**  
+    | 参数       | 简介                                |
+    |:-----------|:------------------------------------|
+    | `center`   | 椭圆圆心在窗口坐标系下的位置        |
     | `radius_x` | 椭圆在窗口坐标系下 x 轴方向半径大小 |
     | `radius_y` | 椭圆在窗口坐标系下 x 轴方向半径大小 |
-    | `fill`   | 是否填充，默认为不填充   |
+    | `fill`     | 是否填充，默认为不填充              |
 + **返回值简介：** 无
 + **相关内容：**
     - [struct ETHX_Point](#ETHX_Point)
@@ -986,14 +1009,14 @@ ETHX_DrawImage 四个重载的应用场景总结：
     ```c++
     void ETHX_DrawPie(const ETHX_Point& center, int radius, int start_angle, int end_angle, bool fill = false);
     ```
-+ **参数简介：  
-    | 参数    | 简介                   |
-    |:--------|:-----------------------|
-    | `center`   | 扇形所在圆的圆心在窗口坐标系下的位置 |
-    | `radius` | 扇形所在圆的半径大小 |
++ **参数简介：**  
+    | 参数          | 简介                                   |
+    |:--------------|:---------------------------------------|
+    | `center`      | 扇形所在圆的圆心在窗口坐标系下的位置   |
+    | `radius`      | 扇形所在圆的半径大小                   |
     | `start_angle` | 扇形所在圆的的起始角度，逆时针为正方向 |
-    | `end_angle` | 扇形所在圆的的终止角度，逆时针为正方向 |
-    | `fill`   | 是否填充，默认为不填充   |
+    | `end_angle`   | 扇形所在圆的的终止角度，逆时针为正方向 |
+    | `fill`        | 是否填充，默认为不填充                 |
 + **返回值简介：** 无
 + **相关内容：**
     - [struct ETHX_Point](#ETHX_Point)
@@ -1007,13 +1030,13 @@ ETHX_DrawImage 四个重载的应用场景总结：
     ```c++
     void ETHX_DrawTriangle(const ETHX_Point& point_1, const ETHX_Point& point_2, const ETHX_Point& point_3, bool fill = false);
     ```
-+ **参数简介：  
-    | 参数    | 简介                   |
-    |:--------|:-----------------------|
-    | `point_1`   | 三角形第 1 个顶点在窗口坐标系下的位置 |
++ **参数简介：**  
+    | 参数      | 简介                                  |
+    |:----------|:--------------------------------------|
+    | `point_1` | 三角形第 1 个顶点在窗口坐标系下的位置 |
     | `point_2` | 三角形第 2 个顶点在窗口坐标系下的位置 |
     | `point_3` | 三角形第 3 个顶点在窗口坐标系下的位置 |
-    | `fill`   | 是否填充，默认为不填充   |
+    | `fill`    | 是否填充，默认为不填充                |
 + **返回值简介：** 无
 + **相关内容：**
     - [struct ETHX_Point](#ETHX_Point)
@@ -1029,21 +1052,21 @@ ETHX_DrawImage 四个重载的应用场景总结：
         ETHX_Font* ETHX_LoadFont(const std::string& path, int ptsize);
         ```
         + **参数简介：**  
-            | 参数   | 简介         |
-            |:-------|:-------------|
-            | `path` | 图像文件路径 |
-            | `ptsize` | 字体大小 |
+            | 参数     | 简介         |
+            |:---------|:-------------|
+            | `path`   | 图像文件路径 |
+            | `ptsize` | 字体大小     |
         + **返回值简介：** 字体对象指针，加载失败则返回 `nullptr`
     - **原型 2：**
         ```c++
         ETHX_Font* ETHX_LoadFont(void* data, size_t size, int ptsize);
         ```
         + **参数简介：**  
-            | 参数   | 简介                   |
-            |:-------|:-----------------------|
-            | `data` | 存储字体数据的内存指针 |
-            | `size` | 字体数据大小           |
-            | `ptsize` | 字体大小           |
+            | 参数     | 简介                   |
+            |:---------|:-----------------------|
+            | `data`   | 存储字体数据的内存指针 |
+            | `size`   | 字体数据大小           |
+            | `ptsize` | 字体大小               |
         + **返回值简介：** 字体对象指针，加载失败则返回 `nullptr`
 + **备注：**  
 字体对象指针可以直接使用 `delete` 销毁内存；  
@@ -1054,10 +1077,172 @@ ETHX_DrawImage 四个重载的应用场景总结：
     // 检查是否加载成功，若失败则输出提示信息
     if (!(pFont = ETHX_LoadFont("MyFont.ttf", 75)))
         std::cout << "Load Font Error !" << std::endl;
-    // 销毁图像对象内存
+    // 销毁字体对象内存
     delete pFont; pFont = nullptr;
     ```
 + **相关内容：**
     - [struct ETHX_Font](#ETHX_Font)
     - [ETHX_DrawText()](#ETHX_DrawText)
     - [ETHX_CreateTextImage()](#ETHX_CreateTextImage)
+
+***
+
+<a id="ETHX_SetFontStyle"></a>
+### ETHX_SetFontStyle()
++ **功能：** 设置字体样式
++ **函数原型：**
+    ```c++
+    void ETHX_SetFontStyle(ETHX_Font* font, ETHX_FontStyle style);
+    ```
++ **参数简介：**  
+    | 参数    | 简介     |
+    |:--------|:---------|
+    | `font`  | 字体对象 |
+    | `style` | 字体样式 |
++ **返回值简介：** 无
++ **代码示例：**
+    ```c++
+    // ETHX_Font* pFont = ...
+    
+    // 设置字体样式为加粗和斜体
+    ETHX_SetFontStyle(pFont, ETHX_FONT_BOLD | ETHX_FONT_ITALIC);
+    ```
++ **相关内容：**
+    - [enum ETHX_FontStyle](#ETHX_FontStyle)
+    - [struct ETHX_Font](#ETHX_Font)
+    - [ETHX_GetFontStyle()](#ETHX_GetFontStyle)
+
+***
+
+<a id="ETHX_GetFontStyle"></a>
+### ETHX_GetFontStyle()
++ **功能：** 获取字体样式
++ **函数原型：**
+    ```c++
+    int ETHX_GetFontStyle(ETHX_Font* font);
+    ```
++ **参数简介：**  
+    | 参数   | 简介     |
+    |:-------|:---------|
+    | `font` | 字体对象 |
++ **返回值简介：** 字体样式，可以按位判断是否具有指定样式
++ **代码示例：**
+    ```c++
+    // ETHX_Font* pFont = ...
+    
+    // 若字体样式包含粗体则输出信息
+    int style = ETHX_SetFontStyle(pFont);
+    if (style | ETHX_FONT_BOLD)
+        std::cout << "BOLD FONT !" << std::endl;
+    ```
++ **相关内容：**
+    - [enum ETHX_FontStyle](#ETHX_FontStyle)
+    - [struct ETHX_Font](#ETHX_Font)
+    - [ETHX_SetFontStyle()](#ETHX_SetFontStyle)
+
+***
+
+<a id="ETHX_GetTextSize"></a>
+### ETHX_GetTextSize()
++ **功能：** 获取指定字体的文本尺寸
++ **函数原型：**
+    ```c++
+    void ETHX_GetTextSize(ETHX_Font* font, const std::string& text, int& width, int& height);
+    ```
++ **参数简介：**  
+    | 参数     | 简介     |
+    |:---------|:---------|
+    | `font`   | 字体对象 |
+    | `text`   | 文本内容 |
+    | `width`  | 文本宽度 |
+    | `height` | 文本高度 |
++ **返回值简介：** 无
++ **备注：**  
+虽然可以使用 ETHX_CreateTextImage 生成文本图像后再通过 ETHX_GetImageSize 获取其渲染后尺寸，但是使用 ETHX_GetTextSize 则可以避免渲染带来的性能浪费，仅仅通过字体内置的字符宽高数据计算出渲染后的尺寸
++ **代码示例：**
+    ```c++
+    // ETHX_Font* pFont = ...
+    
+    // 获取并输出字符串 HelloWorld 使用指定字体渲染后的文本尺寸
+    int width, height;
+    ETHX_GetTextSize(pFont, "HelloWorld", width, height);
+    std::cout << "Text width: " << width << std::endl;
+    std::cout << "Text height: " << height << std::endl;
+    ```
++ **相关内容：**
+    - [struct ETHX_Font](#ETHX_Font)
+
+***
+
+<a id="ETHX_DrawText"></a>
+### ETHX_DrawText()
++ **功能：** 绘制文本内容
++ **函数原型：**
+    - **原型 1：**
+        ```c++
+        void ETHX_DrawText(ETHX_Font* font, const std::string& text, const ETHX_Point& pos);
+        ```
+        + **参数简介：**  
+            | 参数   | 简介                               |
+            |:-------|:-----------------------------------|
+            | `font` | 字体对象                           |
+            | `text` | 文本内容                           |
+            | `pos`  | 文本左上角顶点在屏幕坐标系下的位置 |
+        + **返回值简介：** 无
+    - **原型 2：**
+        ```c++
+        void ETHX_DrawText(ETHX_Font* font, const std::string& text, const ETHX_Rect& show_rect);
+        ```
+        + **参数简介：**  
+            | 参数        | 简介                     |
+            |:------------|:-------------------------|
+            | `font`      | 字体对象                 |
+            | `text`      | 文本内容                 |
+            | `show_rect` | 文本屏幕坐标系下显示区域 |
+        + **返回值简介：** 无
++ **备注：**  
+ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先通过调用 ETHX_CreateTextImage 创建字体图像，然后再通过 ETHX_DrawImage 将图像渲染到窗口上，最后会销毁此字体图像；  
+若需手动控制被渲染出字体的生命周期，防止因频繁创建销毁导致性能浪费，请使用 ETHX_CreateTextImage 创建并保存渲染后的字体图像，详见 [ETHX_CreateTextImage](#ETHX_CreateTextImage) 示例代码
++ **代码示例：**
+    ```c++
+    // ETHX_Font* pFont = ...
+
+    // 将 HelloWorld 字符串以默认大小渲染到窗口左上角
+    ETHX_Point point = { 0, 0 };
+    ETHX_DrawText(pFont, "HelloWorld", point);
+    ```
++ **相关内容：**
+    - [struct ETHX_Font](#ETHX_Font)
+    - [ETHX_CreateTextImage()](#ETHX_CreateTextImage)
+
+***
+
+<a id="ETHX_CreateTextImage"></a>
+### ETHX_CreateTextImage()
++ **功能：** 创建文本图像
++ **函数原型：**
+    ```c++
+    ETHX_Image* ETHX_CreateTextImage(ETHX_Font* font, const std::string& text);
+    ```
++ **参数简介：**  
+    | 参数   | 简介     |
+    |:-------|:---------|
+    | `font` | 字体对象 |
+    | `text` | 文本内容 |
++ **返回值简介：** 文本图像，创建失败则返回 `nullptr`
++ **备注：**  
+相较于 ETHX_DrawText，ETHX_CreateTextImage 可以返回并缓存创建出的文本图像，从而节省频繁渲染创建文本图像所带来的性能损耗；
+并且由于返回值为 EtherX 的通用图像格式，应用于图像的函数如：裁剪、透明度变换等操作同样也可作用于文本图像
++ **代码示例：**
+    ```c++
+    // ETHX_Font* pFont = ...
+    
+    // 使用文本图像的方式将 HelloWorld 字符串以默认大小渲染到窗口左上角 
+    ETHX_Image* pImage = ETHX_CreateTextImage(pFont, "HelloWorld");
+    ETHX_Point point = { 0, 0 };
+    ETHX_DrawImage(pFont, pImage, point);
+    ```
++ **相关内容：**
+    - [struct ETHX_Image](#ETHX_Image)
+    - [struct ETHX_Font](#ETHX_Font)
+    - [ETHX_DrawText()](#ETHX_DrawText)
