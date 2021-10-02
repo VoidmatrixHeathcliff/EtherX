@@ -93,6 +93,7 @@
 
 + [窗口坐标系](#window-coordinate-system)
 + [图像坐标系](#image-coordinate-system)
++ [字符串编码](#string-encoding)
 
 </details>
 
@@ -1231,7 +1232,7 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
     | `text` | 文本内容 |
 + **返回值简介：** 文本图像，创建失败则返回 `nullptr`
 + **备注：**  
-相较于 ETHX_DrawText，ETHX_CreateTextImage 可以返回并缓存创建出的文本图像，从而节省频繁渲染创建文本图像所带来的性能损耗；
+相较于 ETHX_DrawText，ETHX_CreateTextImage 可以返回并缓存创建出的文本图像，从而节省频繁渲染创建文本图像所带来的性能损耗；  
 并且由于返回值为 EtherX 的通用图像格式，应用于图像的函数如：裁剪、透明度变换等操作同样也可作用于文本图像
 + **代码示例：**
     ```c++
@@ -1246,3 +1247,87 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
     - [struct ETHX_Image](#ETHX_Image)
     - [struct ETHX_Font](#ETHX_Font)
     - [ETHX_DrawText()](#ETHX_DrawText)
+
+***
+
+<a id="ETHX_LoadMusic"></a>
+### ETHX_LoadMusic()
++ **功能：** 加载音乐对象
++ **函数原型：**
+    ```c++
+    ETHX_Music* ETHX_LoadMusic(const std::string& path);
+    ```
++ **参数简介：**  
+    | 参数   | 简介     |
+    |:-------|:---------|
+    | `path` | 音乐文件路径 |
++ **返回值简介：** 音乐对象指针，创建失败则返回 `nullptr`
++ **备注：**  
+音乐对象指针可以直接使用 `delete` 销毁内存，销毁正在播放的音乐对象可能导致不可预知的后果，在这之前可以使用 ETHX_CheckMusicPlaying 检查音乐是否正在播放；  
+由于音乐文件普遍较大，EtherX 暂时不对从内存中加载音乐对象提供支持，EtherX 内部将以最大为 2048 字节大小的数据块为单位分块对音乐进行动态加载和播放
++ **代码示例：**
+    ```c++
+    ETHX_Music* pMusic;
+    // 检查是否加载成功，若失败则输出提示信息
+    if (!(pMusic = ETHX_LoadMusic("BGM.mp3")))
+        std::cout << "Load Music Error !" << std::endl;
+    // 销毁字体对象内存
+    delete pMusic; pMusic = nullptr;
+    ```
++ **相关内容：**
+    - [struct ETHX_Music](#ETHX_Music)
+    - [ETHX_PlayMusic()](#ETHX_PlayMusic)
+    - [ETHX_CheckMusicPlaying()](#ETHX_CheckMusicPlaying)
+
+***
+
+<a id="ETHX_PlayMusic"></a>
+### ETHX_PlayMusic()
++ **功能：** 播放音乐对象
++ **函数原型：**
+    ```c++
+    void ETHX_PlayMusic(ETHX_Music* music, int loops, bool fade_in = false, int delay = 0);
+    ```
++ **参数简介：**  
+    | 参数   | 简介     |
+    |:-------|:---------|
+    | `music` | 音乐对象 |
+    | `loops` | 循环次数，-1 为无限循环 |
+    | `fade_in` | 是否启用淡入效果，默认为不启用 |
+    | `delay` | 淡入效果持续时间，单位为毫秒，默认为 0 |
++ **返回值简介：** 无
++ **代码示例：**
+    ```c++
+    // ETHX_Music* pMusic = ...
+
+    // 使用 1.5 秒的淡出效果循环播放音乐
+    ETHX_PlayMusic(pMusic, -1, true, 1500);
+    ```
++ **相关内容：**
+    - [struct ETHX_Music](#ETHX_Music)
+    - [ETHX_PlayMusic()](#ETHX_PlayMusic)
+    - [ETHX_CheckMusicPlaying()](#ETHX_CheckMusicPlaying)
+
+***
+
+<a id="ETHX_StopMusic"></a>
+### ETHX_StopMusic()
++ **功能：** 停止正在播放的音乐
++ **函数原型：**
+    ```c++
+    void ETHX_StopMusic(bool fade_out = false, int delay = 0);
+    ```
++ **参数简介：**  
+    | 参数   | 简介     |
+    |:-------|:---------|
+    | `fade_out` | 是否启用淡出效果，默认为不启用 |
+    | `delay` | 淡出效果持续时间，单位为毫秒，默认为 0 |
++ **返回值简介：** 无
++ **代码示例：**
+    ```c++
+    // 使用 1.5 秒的淡出效果停止正在播放的音乐
+    ETHX_StopMusic(true, 1500);
+    ```
++ **相关内容：**
+    - [ETHX_PlayMusic()](#ETHX_PlayMusic)
+    - [ETHX_PauseMusic()](#ETHX_PauseMusic)
