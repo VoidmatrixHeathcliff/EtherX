@@ -1331,3 +1331,97 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
 + **相关内容：**
     - [ETHX_PlayMusic()](#ETHX_PlayMusic)
     - [ETHX_PauseMusic()](#ETHX_PauseMusic)
+
+***
+
+<a id="ETHX_CheckMusicPlaying"></a>
+### ETHX_CheckMusicPlaying()
++ **功能：** 检查音乐是否正在播放
++ **函数原型：**
+    ```c++
+    bool ETHX_CheckMusicPlaying();
+    ```
++ **参数简介：** 无
++ **返回值简介：** 音乐是否正在播放
++ **相关内容：**
+    - [ETHX_PlayMusic()](#ETHX_PlayMusic)
+
+***
+
+<a id="ETHX_PauseMusic"></a>
+### ETHX_PauseMusic()
++ **功能：** 暂停正在播放的音乐
++ **函数原型：**
+    ```c++
+    void ETHX_PauseMusic();
+    ```
++ **参数简介：** 无
++ **返回值简介：** 无
++ **备注：**  
+与 ETHX_StopMusic 用于停止音乐不同的是，暂停后的音乐可以通过 ETHX_ResumeMusic 恢复播放
++ **相关内容：**
+    - [ETHX_PlayMusic()](#ETHX_PlayMusic)
+    - [ETHX_StopMusic()](#ETHX_StopMusic)
+    - [ETHX_ResumeMusic()](#ETHX_ResumeMusic)
+
+***
+
+<a id="ETHX_ResumeMusic"></a>
+### ETHX_ResumeMusic()
++ **功能：** 恢复播放暂停状态的音乐
++ **函数原型：**
+    ```c++
+    void ETHX_ResumeMusic();
+    ```
++ **参数简介：** 无
++ **返回值简介：** 无
++ **相关内容：**
+    - [ETHX_PlayMusic()](#ETHX_PlayMusic)
+    - [ETHX_StopMusic()](#ETHX_StopMusic)
+    - [ETHX_PauseMusic()](#ETHX_PauseMusic)
+
+***
+
+<a id="ETHX_RewindMusic"></a>
+### ETHX_ResumeMusic()
++ **功能：** 将当前音乐重新从起点播放
++ **函数原型：**
+    ```c++
+    void ETHX_RewindMusic();
+    ```
++ **参数简介：** 无
++ **返回值简介：** 无
++ **相关内容：**
+    - [ETHX_PlayMusic()](#ETHX_PlayMusic)
+    - [ETHX_StopMusic()](#ETHX_StopMusic)
+
+***
+
+<a id="ETHX_SetMusicVolume"></a>
+### ETHX_SetMusicVolume()
++ **功能：** 设置音乐播放的音量
++ **函数原型：**
+    ```c++
+    void ETHX_SetMusicVolume(int volume);
+    ```
++ **参数简介：** 
+    | 参数   | 简介     |
+    |:-------|:---------|
+    | `volume` | 音乐音量，取值范围为 0~128 |
++ **返回值简介：** 无
++ **相关内容：**
+    - [ETHX_GetMusicVolume()](#ETHX_GetMusicVolume)
+
+***
+
+<a id="ETHX_GetMusicVolume"></a>
+### ETHX_GetMusicVolume()
++ **功能：** 获取音乐播放的音量
++ **函数原型：**
+    ```c++
+    int ETHX_GetMusicVolume();
+    ```
++ **参数简介：** 无
++ **返回值简介：** 当前音乐播放的音量，取值范围为 0~128
++ **相关内容：**
+    - [ETHX_SetMusicVolume()](#ETHX_SetMusicVolume)
