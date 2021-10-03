@@ -344,6 +344,7 @@ ETHX_API ETHX_Image* ETHX_CreateTextImage(ETHX_Font* font, const std::string& te
 ETHX_API ETHX_Music* ETHX_LoadMusic(const std::string& path);
 ETHX_API void ETHX_PlayMusic(ETHX_Music* music, int loops, bool fade_in = false, int delay = 0);
 ETHX_API void ETHX_StopMusic(bool fade_out = false, int delay = 0);
+ETHX_API bool ETHX_CheckMusicPlaying();
 ETHX_API void ETHX_PauseMusic();
 ETHX_API void ETHX_ResumeMusic();
 ETHX_API void ETHX_RewindMusic();
@@ -356,7 +357,7 @@ ETHX_API void ETHX_SetSoundVolume(ETHX_Sound* sound, int volume);
 ETHX_API int ETHX_GetSoundVolume(ETHX_Sound* sound);
 
 // Interactivity API
-ETHX_API const ETHX_Event* const ETHX_UpdateEvent();
+ETHX_API bool ETHX_UpdateEvent(ETHX_Event& event);
 
 // Time API
 ETHX_API void ETHX_Sleep(Uint32 ms);
@@ -890,6 +891,11 @@ void ETHX_StopMusic(bool fade_out, int delay)
 	fade_out ? Mix_FadeOutMusic(delay) : Mix_HaltMusic();
 }
 
+bool ETHX_CheckMusicPlaying()
+{
+	return Mix_PlayingMusic();
+}
+
 void ETHX_PauseMusic()
 {
 	Mix_PauseMusic();
@@ -977,45 +983,45 @@ int ETHX_GetSoundVolume(ETHX_Sound* sound)
 * *****************************************
 */
 
-const ETHX_Event* const ETHX_UpdateEvent()
+bool ETHX_UpdateEvent(ETHX_Event& event)
 {
 	SDL_Event _event;
 
-	if (!SDL_PollEvent(&_event)) return nullptr;
+	if (!SDL_PollEvent(&_event)) return false;
 
 	delete _pEvent; _pEvent = new ETHX_Event();
 
 	switch (_event.type)
 	{
 	case SDL_QUIT:
-		_pEvent->type = ETHX_ET_QUIT;
+		event.type = ETHX_ET_QUIT;
 		break;
 	case SDL_MOUSEMOTION:
-		_pEvent->type = ETHX_ET_MOUSEMOTION;
-		_pEvent->mouse_pos_x = _event.motion.x;
-		_pEvent->mouse_pos_y = _event.motion.y;
+		event.type = ETHX_ET_MOUSEMOTION;
+		event.mouse_pos_x = _event.motion.x;
+		event.mouse_pos_y = _event.motion.y;
 		break;
 	case SDL_MOUSEWHEEL:
-		_pEvent->type = ETHX_ET_MOUSESCROLL;
-		_pEvent->mouse_scroll_x = _event.wheel.x;
-		_pEvent->mouse_scroll_y = _event.wheel.y;
+		event.type = ETHX_ET_MOUSESCROLL;
+		event.mouse_scroll_x = _event.wheel.x;
+		event.mouse_scroll_y = _event.wheel.y;
 		break;
 	case SDL_TEXTINPUT:
-		_pEvent->type = ETHX_ET_TEXTINPUT;
-		_pEvent->text = _event.text.text;
+		event.type = ETHX_ET_TEXTINPUT;
+		event.text = _event.text.text;
 		break;
 	case SDL_WINDOWEVENT:
-		_pEvent->type = (ETHX_EventType)_event.window.event;
+		event.type = (ETHX_EventType)_event.window.event;
 		break;
 	case SDL_KEYDOWN:
-		_pEvent->type = ETHX_ET_KEYDOWN;
-		_pEvent->key_code = (ETHX_KeyCode)_event.key.keysym.sym;
+		event.type = ETHX_ET_KEYDOWN;
+		event.key_code = (ETHX_KeyCode)_event.key.keysym.sym;
 		break;
 	default:
 		break;
 	}
 
-	return _pEvent;
+	return true;
 }
 
 /*
