@@ -411,7 +411,6 @@ struct ETHX_Sound
 
 SDL_Window* _pWindow = nullptr;
 SDL_Renderer* _pWRenderer = nullptr;
-ETHX_Event* _pEvent = nullptr;
 
 /*
 * *****************************************
@@ -988,8 +987,6 @@ bool ETHX_UpdateEvent(ETHX_Event& event)
 	SDL_Event _event;
 
 	if (!SDL_PollEvent(&_event)) return false;
-
-	delete _pEvent; _pEvent = new ETHX_Event();
 
 	switch (_event.type)
 	{

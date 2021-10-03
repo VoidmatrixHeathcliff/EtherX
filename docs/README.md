@@ -99,10 +99,21 @@
 
 <details>
     <summary>🕹 交互事件相关函数</summary>
+
+| 函数名                                  | 简介             |
+|:----------------------------------------|:-----------------|
+| [ETHX_UpdateEvent()](#ETHX_UpdateEvent) | 更新并获取新事件 |
+
 </details>
 
 <details>
     <summary>⏲ 时间控制相关函数</summary>
+
+| 函数名                                  | 简介             |
+|:----------------------------------------|:-----------------|
+| [ETHX_Sleep()](#ETHX_Sleep) | 暂停程序指定时长 |
+| [ETHX_GetInitTime()](#ETHX_GetInitTime) | 获取程序从初始化到现在的时长 |
+
 </details>
 
 <details>
@@ -1567,3 +1578,51 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
     ```
 + **相关内容：**
     - [struct ETHX_Event](#ETHX_Event)
+
+***
+
+<a id="ETHX_Sleep"></a>
+### ETHX_Sleep()
++ **功能：** 暂停程序指定时长
++ **函数原型：**
+    ```c++
+    void ETHX_Sleep(Uint32 ms);
+    ```
++ **参数简介：** 
+    | 参数    | 简介     |
+    |:--------|:---------|
+    | `ms` | 暂停时长，单位为毫秒 |
++ **返回值简介：** 无
++ **相关内容：** 无
+
+***
+
+<a id="ETHX_GetInitTime"></a>
+### ETHX_GetInitTime()
++ **功能：** 获取程序从初始化到现在的时长
++ **函数原型：**
+    ```c++
+    Uint32 ETHX_GetInitTime();
+    ```
++ **参数简介：**  无
++ **返回值简介：** 时长，单位为毫秒
++ **相关内容：** 
+    - [ETHX_InitWindow()](#ETHX_InitWindow)
+
+***
+
+<a id="window-coordinate-system"></a>
+### 附加内容：窗口坐标系
+窗口坐标系是绘图渲染以及事件处理的基础，在 EtherX 中，窗口坐标系的原点位于窗口的左上角可渲染区域处，水平向右为 x 轴正方向，竖直向下为 y 轴正方向，度量单位为像素
+
+***
+
+<a id="image-coordinate-system"></a>
+### 附加内容：图像坐标系
+图像坐标系主要用于对图像裁剪时使用，与 [窗口坐标系](#window-coordinate-system) 相似，图像坐标系的原点位于图像左上角顶点处，水平向右为 x 轴正方向，竖直向下为 y 轴正方向，度量单位为像素，图像的旋转和翻转等操作不会影响图像坐标系
+
+***
+
+<a id="string-encoding"></a>
+### 附加内容：字符串编码
+为确保对中文字符的支持，EtherX 所有的字符串变量均默认采用 UTF-8 编码，在编译时可以将源码保存为 UTF-8 格式，或在运行时使用相关函数将其他编码的字符串转换为 UTF-8 编码的字符串
