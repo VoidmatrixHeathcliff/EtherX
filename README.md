@@ -4,7 +4,7 @@ EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ �
 
 > 本项目命名灵感来自 EasyX，但由于 EasyX 至今尚未开源，且其过度依赖 Windows 编程模型，考虑到部分开发者的诉求，EtherX 希望在一定程度上成为 EasyX 的替代解决方案。需要注意的是，虽然命名十分相像，但本项目与 [EtherEngineX](https://github.com/EtherProject/EtherEngineX) 或 [EtherEngine](https://github.com/EtherProject/EtherEngine) 均没有直接联系！ 
 
-## 本项目特点及预期功能
+## 项目简介
 
 + 单头文件依赖，通过开关宏决定是否将函数实现引入
 + 本项目由 SDL2 和相关开源项目封装而成，**支持 Windows，Mac，Linux 等平台**
@@ -13,12 +13,26 @@ EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ �
 + 本项目以教学为目的，考虑到对部分老旧设备支持，Release 目前只提供 Windows_x86 模式下的静态链接库版本，如需其他版本或其他操作系统支持，请自行编译源码
 + 本项目基于 MIT 协议开放源代码，**任何人都可以对源码及衍生作品进行修改、发布、出售和再许可**，但是使用者必须在相关的作品中声明其出处
 
-## 教程及文档
+## 本地编译
 
-> 文档正在维护……
+如果您使用 MSVC 相关编译器，可以直接 [下载最新的 Release 版本](https://github.com/VoidmatrixHeathcliff/EtherX/releases)  
+项目工程是基于 VS2019 搭建的静态库导出项目，SDL2 及相关依赖库已静态编译完成，可以直接拉取编译  
+如果您希望得到其他版本的 EtherX 静态库，可以下载并编译下表所示的全部依赖项，将 [EtherX.h](https://github.com/VoidmatrixHeathcliff/EtherX/blob/main/EtherX/EtherX.h) 添加到您的项目中，并定义 `ETHERX_IMPLEMENTATION` 宏确保所有的函数实现添加到编译内容中
 
-+ [快速上手文档](docs/quick-start.md) 以一个简单的绘图游戏为例，介绍常用功能
-+ 更多内容和函数接口详细介绍见 [完整参考手册](docs/README.md)
+|库名称|网址|
+|:----|:----|
+|**SDL - 2.0.17**|[https://github.com/libsdl-org/SDL/](https://github.com/libsdl-org/SDL/)  |
+|**SDL_image - 2.0.5**|[https://www.libsdl.org/projects/SDL_image/](https://www.libsdl.org/projects/SDL_image/)  |
+|**SDL_gfx - 1.0.4**|[https://sourceforge.net/projects/sdlgfx/](https://sourceforge.net/projects/sdlgfx/)  |
+|**SDL_mixer - 2.0.4**|[https://www.libsdl.org/projects/SDL_mixer/](https://www.libsdl.org/projects/SDL_mixer/)  |
+|**SDL_ttf - 2.0.15**|[https://www.libsdl.org/projects/SDL_ttf/](https://www.libsdl.org/projects/SDL_ttf/)  |
+
+## 教程文档
+
+> 完全参考手册已完成，快速上手文档维护中……
+
++ [快速上手文档](docs/quick-start.md) 以数个深入浅出的示例介绍常用功能
++ 更多内容和函数接口介绍详见 [完整参考手册](docs/README.md)
 
 ## 联系开发者
 
