@@ -78,6 +78,23 @@
 
 <details>
     <summary>🎼 音媒体播控相关函数</summary>
+
+| 函数名                                              | 简介                     |
+|:----------------------------------------------------|:-------------------------|
+| [ETHX_LoadMusic()](#ETHX_LoadMusic)                 | 加载音乐对象             |
+| [ETHX_PlayMusic()](#ETHX_PlayMusic)                 | 播放音乐对象             |
+| [ETHX_StopMusic()](#ETHX_StopMusic)                 | 显停止正在播放的音乐     |
+| [ETHX_CheckMusicPlaying()](#ETHX_CheckMusicPlaying) | 检查音乐是否正在播放     |
+| [ETHX_PauseMusic()](#ETHX_PauseMusic)               | 暂停正在播放的音乐       |
+| [ETHX_ResumeMusic()](#ETHX_ResumeMusic)             | 恢复播放暂停状态的音乐   |
+| [ETHX_RewindMusic()](#ETHX_RewindMusic)             | 将当前音乐重新从起点播放 |
+| [ETHX_SetMusicVolume()](#ETHX_SetMusicVolume)       | 设置音乐播放的音量       |
+| [ETHX_GetMusicVolume()](#ETHX_GetMusicVolume)       | 获取音乐播放的音量       |
+| [ETHX_LoadSound()](#ETHX_LoadSound)                 | 加载音效对象             |
+| [ETHX_PlaySound()](#ETHX_PlaySound)                 | 播放音效对象             |
+| [ETHX_SetSoundVolume()](#ETHX_SetSoundVolume)       | 设置音效播放的音量       |
+| [ETHX_GetSoundVolume()](#ETHX_GetSoundVolume)       | 获取音效播放的音量       |
+
 </details>
 
 <details>
@@ -159,19 +176,6 @@
     | `int mouse_scroll_x`    | 鼠标滚轮事件对应的 x 方向滚动距离，向左为负，向右为正 |
     | `int mouse_scroll_y`    | 鼠标滚轮事件对应的 x 方向滚动距离，向前为负，向后为正 |
     | `std::string text`      | 文本输入事件对应的文本输入内容                        |
-+ **备注：**  
-在非此事件发生时尝试获取对应的成员值可能会导致不可预知的结果，请先根据 `type` 判断当前事件类型再进行对应值的获取，示例如下：
-    ```c++
-    // ETHX_Event* pEvent = ...
-
-    // 正确用法，在鼠标移动事件发生时才去访问对应成员的值
-    if (pEvent->type == ETHX_ET_MOUSEMOTION)
-        int x = pEvent->mouse_pos_x, y = pEvent->mouse_pos_y;
-
-    // 错误用法，此时的 text 成员可能访问异常
-    if (pEvent->type == ETHX_ET_MOUSEMOTION)
-        std::string input = pEvent->text;
-    ```
 + **相关内容：**
     - [enum ETHX_EventType](#ETHX_EventType)
     - [enum ETHX_KeyCode](#ETHX_KeyCode)
@@ -1258,8 +1262,8 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
     ETHX_Music* ETHX_LoadMusic(const std::string& path);
     ```
 + **参数简介：**  
-    | 参数   | 简介     |
-    |:-------|:---------|
+    | 参数   | 简介         |
+    |:-------|:-------------|
     | `path` | 音乐文件路径 |
 + **返回值简介：** 音乐对象指针，创建失败则返回 `nullptr`
 + **备注：**  
@@ -1278,6 +1282,7 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
     - [struct ETHX_Music](#ETHX_Music)
     - [ETHX_PlayMusic()](#ETHX_PlayMusic)
     - [ETHX_CheckMusicPlaying()](#ETHX_CheckMusicPlaying)
+    - [ETHX_LoadSound()](#ETHX_LoadSound)
 
 ***
 
@@ -1289,12 +1294,12 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
     void ETHX_PlayMusic(ETHX_Music* music, int loops, bool fade_in = false, int delay = 0);
     ```
 + **参数简介：**  
-    | 参数   | 简介     |
-    |:-------|:---------|
-    | `music` | 音乐对象 |
-    | `loops` | 循环次数，-1 为无限循环 |
-    | `fade_in` | 是否启用淡入效果，默认为不启用 |
-    | `delay` | 淡入效果持续时间，单位为毫秒，默认为 0 |
+    | 参数      | 简介                                   |
+    |:----------|:---------------------------------------|
+    | `music`   | 音乐对象                               |
+    | `loops`   | 循环次数，-1 为无限循环                |
+    | `fade_in` | 是否启用淡入效果，默认为不启用         |
+    | `delay`   | 淡入效果持续时间，单位为毫秒，默认为 0 |
 + **返回值简介：** 无
 + **代码示例：**
     ```c++
@@ -1305,7 +1310,6 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
     ```
 + **相关内容：**
     - [struct ETHX_Music](#ETHX_Music)
-    - [ETHX_PlayMusic()](#ETHX_PlayMusic)
     - [ETHX_CheckMusicPlaying()](#ETHX_CheckMusicPlaying)
 
 ***
@@ -1318,10 +1322,10 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
     void ETHX_StopMusic(bool fade_out = false, int delay = 0);
     ```
 + **参数简介：**  
-    | 参数   | 简介     |
-    |:-------|:---------|
-    | `fade_out` | 是否启用淡出效果，默认为不启用 |
-    | `delay` | 淡出效果持续时间，单位为毫秒，默认为 0 |
+    | 参数       | 简介                                   |
+    |:-----------|:---------------------------------------|
+    | `fade_out` | 是否启用淡出效果，默认为不启用         |
+    | `delay`    | 淡出效果持续时间，单位为毫秒，默认为 0 |
 + **返回值简介：** 无
 + **代码示例：**
     ```c++
@@ -1405,8 +1409,8 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
     void ETHX_SetMusicVolume(int volume);
     ```
 + **参数简介：** 
-    | 参数   | 简介     |
-    |:-------|:---------|
+    | 参数     | 简介                       |
+    |:---------|:---------------------------|
     | `volume` | 音乐音量，取值范围为 0~128 |
 + **返回值简介：** 无
 + **相关内容：**
@@ -1425,3 +1429,141 @@ ETHX_DrawText 为简化版本的字体渲染，在此函数内部，EtherX 先�
 + **返回值简介：** 当前音乐播放的音量，取值范围为 0~128
 + **相关内容：**
     - [ETHX_SetMusicVolume()](#ETHX_SetMusicVolume)
+
+***
+
+<a id="ETHX_LoadSound"></a>
+### ETHX_LoadSound()
++ **功能：** 加载音效对象
++ **函数原型：**
+    - **原型 1：**
+        ```c++
+        ETHX_Sound* ETHX_LoadSound(const std::string& path);
+        ```
+        + **参数简介：**  
+            | 参数   | 简介         |
+            |:-------|:-------------|
+            | `path` | 音效文件路径 |
+        + **返回值简介：** 音效对象指针，加载失败则返回 `nullptr`
+    - **原型 2：**
+        ```c++
+        ETHX_Sound* ETHX_LoadSound(void* data, size_t size);
+        ```
+        + **参数简介：**  
+            | 参数   | 简介                   |
+            |:-------|:-----------------------|
+            | `data` | 存储音效数据的内存指针 |
+            | `size` | 音效数据大小           |
+        + **返回值简介：** 音效对象指针，加载失败则返回 `nullptr`
++ **备注：**  
+音效对象指针可以直接使用 `delete` 销毁内存；  
+与音乐不同的是，音效指体积较小、时间较短、可以被同时播放的音媒体对象，在加载时 EtherX 会将文件数据全部加载进入内存，以确保播放效率，音效对象暂时只支持 WAV 格式
++ **代码示例：**
+    ```c++
+    ETHX_Sound* pSound;
+    // 检查是否加载成功，若失败则输出提示信息
+    if (!(pSound = ETHX_LoadSound("MySound.wav")))
+        std::cout << "Load Sound Error !" << std::endl;
+    // 销毁音效对象内存
+    delete pSound; pSound = nullptr;
+    ```
++ **相关内容：**
+    - [struct ETHX_Sound](#ETHX_Sound)
+    - [ETHX_PlaySound()](#ETHX_PlaySound)
+    - [ETHX_LoadMusic()](#ETHX_LoadMusic)
+
+***
+
+<a id="ETHX_PlaySound"></a>
+### ETHX_PlaySound()
++ **功能：** 播放音效对象
++ **函数原型：**
+    ```c++
+    void ETHX_PlaySound(ETHX_Sound* sound, int loops);
+    ```
++ **参数简介：**  
+    | 参数    | 简介                    |
+    |:--------|:------------------------|
+    | `sound` | 音效对象                |
+    | `loops` | 循环次数，-1 为无限循环 |
++ **返回值简介：** 无
++ **代码示例：**
+    ```c++
+    // ETHX_Sound* pSound = ...
+
+    // 循环播放此音效
+    ETHX_PlaySound(pSound, -1);
+    ```
++ **相关内容：**
+    - [struct ETHX_Sound](#ETHX_Sound)
+
+***
+
+<a id="ETHX_SetSoundVolume"></a>
+### ETHX_SetSoundVolume()
++ **功能：** 设置音效播放的音量
++ **函数原型：**
+    ```c++
+    void ETHX_SetSoundVolume(ETHX_Sound* sound, int volume);
+    ```
++ **参数简介：** 
+    | 参数     | 简介                       |
+    |:---------|:---------------------------|
+    | `sound`  | 音效对象                   |
+    | `volume` | 音乐音量，取值范围为 0~128 |
++ **返回值简介：** 无
++ **相关内容：**
+    - [struct ETHX_Sound](#ETHX_Sound)
+    - [ETHX_GetSoundVolume()](#ETHX_GetSoundVolume)
+
+***
+
+<a id="ETHX_GetSoundVolume"></a>
+### ETHX_GetSoundVolume()
++ **功能：** 获取音效播放的音量
++ **函数原型：**
+    ```c++
+    int ETHX_GetSoundVolume(ETHX_Sound* sound);
+    ```
++ **参数简介：** 
+    | 参数    | 简介     |
+    |:--------|:---------|
+    | `sound` | 音效对象 |
++ **返回值简介：** 当前音效播放的音量，取值范围为 0~128
++ **相关内容：**
+    - [struct ETHX_Sound](#ETHX_Sound)
+    - [ETHX_SetSoundVolume()](#ETHX_SetSoundVolume)
+
+***
+
+<a id="ETHX_UpdateEvent"></a>
+### ETHX_UpdateEvent()
++ **功能：** 更新并获取新事件
++ **函数原型：**
+    ```c++
+    bool ETHX_UpdateEvent(ETHX_Event& event);
+    ```
++ **参数简介：** 
+    | 参数    | 简介     |
+    |:--------|:---------|
+    | `event` | 事件对象 |
++ **返回值简介：** 如果当前事件队列中仍有未被获取的事件，则返回 `true`，反之返回 `false`
++ **代码示例：**
+    ```c++
+    // ETHX_Event event = ...
+
+    // 一个简单的游戏主循环事件处理部分
+    bool isQuit = false
+    while (!isQuit)
+    {
+        // 当事件队列中仍存在没有被获取的事件，则循环获取并处理
+        while (ETHX_UpdateEvent(event))
+        {
+            // 如果当前事件类型为退出事件，则修改主循环条件退出
+            if (event.type == ETHX_ET_QUIT)
+                isQuit = true;
+        }
+    }
+    ```
++ **相关内容：**
+    - [struct ETHX_Event](#ETHX_Event)
