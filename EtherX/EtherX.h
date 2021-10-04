@@ -1,9 +1,7 @@
 #ifndef _ETHERX_H_
 #define _ETHERX_H_
 
-#define ETHERX_IMPLEMENTATION
-
-/*****************************
+/**********************************************************
 * 
 * EtherX - 基于 SDL2 的 EasyX 开源跨平台全套解决方案
 * 
@@ -13,13 +11,17 @@
 * Document:	https://github.com/VoidmatrixHeathcliff/EtherX
 *			https://gitee.com/Voidmatrix/EtherX
 * 
-*****************************/
+***********************************************************/
 
 #ifndef __cplusplus
 #error ETHERX IS ONLY FOR C++
 #endif
 
+#ifdef ETHERX_IMPLEMENTATION
 #define ETHX_API __declspec(dllexport)
+#else
+#define ETHX_API
+#endif // ETHERX_IMPLEMENTATION
 
 #include <string>
 
@@ -1007,12 +1009,16 @@ bool ETHX_UpdateEvent(ETHX_Event& event)
 		event.type = ETHX_ET_TEXTINPUT;
 		event.text = _event.text.text;
 		break;
-	case SDL_WINDOWEVENT:
-		event.type = (ETHX_EventType)_event.window.event;
-		break;
 	case SDL_KEYDOWN:
 		event.type = ETHX_ET_KEYDOWN;
 		event.key_code = (ETHX_KeyCode)_event.key.keysym.sym;
+		break;
+	case SDL_KEYUP:
+		event.type = ETHX_ET_KEYUP;
+		event.key_code = (ETHX_KeyCode)_event.key.keysym.sym;
+		break;
+	case SDL_WINDOWEVENT:
+		event.type = (ETHX_EventType)_event.window.event;
 		break;
 	default:
 		break;
