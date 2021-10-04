@@ -12,7 +12,7 @@ EtherX是一个以SDL作为底层，封装了一些简单易用的对象及函�
 # EtherX库链接
 
 在使用EtherX之前，我们需要先将EtherX的静态库链接至我们的编译器
-如果你不知道如何链接一个静态库，请查阅[这里](Details/LIB.md)
+如果你不知道如何链接一个静态库，请查阅[这里](Details/how-to-build.md)
 
 # 我们需要一个窗口
 
