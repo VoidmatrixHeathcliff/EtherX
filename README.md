@@ -15,9 +15,9 @@ EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ �
 
 ## 本地编译
 
-如果您使用 MSVC 相关编译器，可以直接 [下载最新的 Release 版本](https://github.com/VoidmatrixHeathcliff/EtherX/releases)  
-项目工程是基于 VS2019 搭建的静态库导出项目，SDL2 及相关依赖库已静态编译完成，可以直接拉取编译  
-如果您希望得到其他版本的 EtherX 静态库，可以下载并编译下表所示的全部依赖项，将 [EtherX.h](https://github.com/VoidmatrixHeathcliff/EtherX/blob/main/EtherX/EtherX.h) 添加到您的项目中，并定义 `ETHERX_IMPLEMENTATION` 宏确保所有的函数实现添加到编译内容中
++ 如果您使用 MSVC 相关编译器，可以直接 [下载最新的 Release 版本](https://github.com/VoidmatrixHeathcliff/EtherX/releases)  
++ 项目工程是基于 VS2019 搭建的静态库导出项目，SDL2 及相关依赖库已静态编译完成，可以直接拉取编译  
++ 如果您希望得到其他版本的 EtherX 静态库，可以下载并编译下表所示的全部依赖项，将 [EtherX.h](https://github.com/VoidmatrixHeathcliff/EtherX/blob/main/EtherX/EtherX.h) 添加到您的项目中，并定义 `ETHERX_IMPLEMENTATION` 宏确保所有的函数实现添加到编译内容中
 
 | 库名称                | 网址                                                                                     |
 |:----------------------|:-----------------------------------------------------------------------------------------|
@@ -38,7 +38,7 @@ EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ �
 
 ## 赞助与支持
 
-欢迎对作者进行赞助与支持，帮助作者维护和产出更好的作品
+EtherX 是一个非盈利性项目，感谢对作者进行赞助与支持，以帮助作者维护和产出更好的作品
 
 > 您可以在备注中写明是否愿意将您添加至赞助者名单，并且备注您希望展示的账户名和是否愿意公开金额，默认展示付款账户名（敏感信息加密）和金额，截止目前为止的赞助者名单 [见此处](docs/support/sponsor-list.md)，排名不分先后
 
