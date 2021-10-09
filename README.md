@@ -15,21 +15,19 @@ EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ �
 
 ## 本地编译
 
-如果您使用 MSVC 相关编译器，可以直接 [下载最新的 Release 版本](https://github.com/VoidmatrixHeathcliff/EtherX/releases)  
-项目工程是基于 VS2019 搭建的静态库导出项目，SDL2 及相关依赖库已静态编译完成，可以直接拉取编译  
-如果您希望得到其他版本的 EtherX 静态库，可以下载并编译下表所示的全部依赖项，将 [EtherX.h](https://github.com/VoidmatrixHeathcliff/EtherX/blob/main/EtherX/EtherX.h) 添加到您的项目中，并定义 `ETHERX_IMPLEMENTATION` 宏确保所有的函数实现添加到编译内容中
++ 如果您使用 MSVC 相关编译器，可以直接 [下载最新的 Release 版本](https://github.com/VoidmatrixHeathcliff/EtherX/releases)  
++ 项目工程是基于 VS2019 搭建的静态库导出项目，SDL2 及相关依赖库已静态编译完成，可以直接拉取编译  
++ 如果您希望得到其他版本的 EtherX 静态库，可以下载并编译下表所示的全部依赖项，将 [EtherX.h](https://github.com/VoidmatrixHeathcliff/EtherX/blob/main/EtherX/EtherX.h) 添加到您的项目中，并定义 `ETHERX_IMPLEMENTATION` 宏确保所有的函数实现添加到编译内容中
 
-|库名称|网址|
-|:----|:----|
-|**SDL - 2.0.17**|[https://github.com/libsdl-org/SDL/](https://github.com/libsdl-org/SDL/)  |
-|**SDL_image - 2.0.5**|[https://www.libsdl.org/projects/SDL_image/](https://www.libsdl.org/projects/SDL_image/)  |
-|**SDL_gfx - 1.0.4**|[https://sourceforge.net/projects/sdlgfx/](https://sourceforge.net/projects/sdlgfx/)  |
-|**SDL_mixer - 2.0.4**|[https://www.libsdl.org/projects/SDL_mixer/](https://www.libsdl.org/projects/SDL_mixer/)  |
-|**SDL_ttf - 2.0.15**|[https://www.libsdl.org/projects/SDL_ttf/](https://www.libsdl.org/projects/SDL_ttf/)  |
+| 库名称                | 网址                                                                                     |
+|:----------------------|:-----------------------------------------------------------------------------------------|
+| **SDL - 2.0.17**      | [https://github.com/libsdl-org/SDL/](https://github.com/libsdl-org/SDL/)                 |
+| **SDL_image - 2.0.5** | [https://www.libsdl.org/projects/SDL_image/](https://www.libsdl.org/projects/SDL_image/) |
+| **SDL_gfx - 1.0.4**   | [https://sourceforge.net/projects/sdlgfx/](https://sourceforge.net/projects/sdlgfx/)     |
+| **SDL_mixer - 2.0.4** | [https://www.libsdl.org/projects/SDL_mixer/](https://www.libsdl.org/projects/SDL_mixer/) |
+| **SDL_ttf - 2.0.15**  | [https://www.libsdl.org/projects/SDL_ttf/](https://www.libsdl.org/projects/SDL_ttf/)     |
 
 ## 教程文档
-
-> 完全参考手册已完成，快速上手文档维护中……
 
 + [快速上手文档](docs/quick-start.md) 以数个深入浅出的示例介绍常用功能
 + 更多内容和函数接口介绍详见 [完整参考手册](docs/README.md)
@@ -37,10 +35,13 @@ EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ �
 ## 联系开发者
 
 请直接 [提交 issue](https://github.com/VoidmatrixHeathcliff/EtherX/issues) 或发送邮件至： Voidmatrix@qq.com
+
 ## 赞助与支持
 
-欢迎对作者进行赞助与支持，帮助作者维护和产出更好的作品
+EtherX 是一个非盈利性项目，感谢对作者进行赞助与支持，以帮助作者维护和产出更好的作品
 
-|                           微信                           |                            支付宝                             |
-|:--------------------------------------------------------:|:-------------------------------------------------------------:|
+> 您可以在备注中写明是否愿意将您添加至赞助者名单，并且备注您希望展示的账户名和是否愿意公开金额，默认展示付款账户名（敏感信息加密）和金额，截止目前为止的赞助者名单 [见此处](docs/support/sponsor-list.md)，排名不分先后
+
+|                   微信                    |                    支付宝                    |
+|:-----------------------------------------:|:--------------------------------------------:|
 | ![微信收款码](docs/support/wx_qrcode.jpg) | ![支付宝收款码](docs/support/zfb_qrcode.jpg) |
