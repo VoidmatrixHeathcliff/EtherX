@@ -1,32 +1,32 @@
 # 欢迎来到 EtherX 快速开始文档
 
-EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ 游戏开发工具库  
-在这里，我们将结合实例告诉你 EtherX 的基本用法
+	EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ 游戏开发工具库
+
+	在这里，我们将结合实例告诉你EtherX的基本用法
 
 ## 你将会学到些什么呢？
 
-本次示例，我们将教你如何绘制一个跟随鼠标位置的圆形  
-要实现这个程序，我们将涉及以下内容：
+	本次示例，我们将教你如何绘制一个跟随鼠标位置的圆形
+	要实现这个程序，我们将涉及以下内容：
+	
+		· 帧率控制
+		· 事件处理
 
-+ 帧率控制
-+ 事件处理
-
-如果你已经学习过以上内容，那么你只需要复制下最后的源代码阅读即可
+	如果你已经学习过以上内容，那么你只需要复制下最后的源代码阅读即可
 
 ## EtherX库链接
 
-在使用 EtherX 之前，我们需要先将 EtherX 的静态库链接至我们的编译器，并将头文件添加到工程目录中
-如果你不知道如何执行上述操作，请查阅 [这里](details/how-to-build.md)
+在使用EtherX之前，我们需要先将EtherX的静态库链接至我们的编译器，如果你不知道如何链接一个静态库，请查阅 [这里](details/how-to-build.md)
 
 # 我们需要一个窗口
 
 > 神说，要有窗口，便有了窗口。
 
-这样我们的图像才有地方绘制，才有了形形色色的界面。
+	这样我们的图像才有地方绘制，才有了形形色色的界面。
 
-我想，如果你初学 C++ 的话，你有可能一直在和一个黑框框打交道，
+	我想，如果你初学 C++ 的话，你有可能一直在和一个黑框框打交道，
 
-如果确实是这样的话，现在不一样了，让我们来创建一个可以显示图像的窗口吧！
+	如果确实是这样的话，现在不一样了，让我们来创建一个可以显示图像的窗口吧！
 
 ```C++
 #include "EtherX.h"
@@ -39,9 +39,11 @@ int main()
 }
 ```
 
-在这个程序中，我们将 [EtherX.h](../EtherX/EtherX.h) 包含进来，
+在这个程序中，我们将 EtherX.h 包含进来，
 
-并使用 `ETHX_InitWindow` 创建了一个名字为 HelloEtherX 的尺寸为 800x600 的窗口，
+并使用 `ETHX_InitWindow` 创建了一个名字为 HelloEtherX 的，长 800个像素，宽600个像素 的窗口，
+
+并且以良好的编程习惯写下了一句 `return 0;`（笑）
 
 编译运行一下试试结果？
 
@@ -50,17 +52,16 @@ int main()
 `getchar()` 用于卡住这个程序不让其退出，但是很快你会发现你既不能移动这个窗口，也不能关掉他，
 
 这是因为这个窗口不处理 `事件`，这其中包括关闭窗口的事件，所以你没有办法操作他，你很快就会学到该怎么办的。
-
 # 再来一个圆吧
 
 创建窗口后，我们来绘制一个圆
 
 ```C++
-	// 初始化窗口...
-
+//初始化窗口
 	ETHX_SetDrawColor({ 255,255,0,255 });
 	ETHX_DrawCircle({ 50,50 }, 30, true);
 	ETHX_UpdateWindow();
+//暂停程序
 ```
 
 EtherX 的窗口在直接绘制一个形状时，会用窗口当前的颜色来绘制，
@@ -89,7 +90,7 @@ EtherX 的窗口在直接绘制一个形状时，会用窗口当前的颜色来�
 
 想要我们的窗口稳定地更新图像，我们必须对窗口进行 `帧率控制`
 
-设想一下，你在玩一个沙盒游戏的时候，当游戏内没有多少动物处理的时候，游戏很快就能跑完一次循环，比如它用了3毫秒，
+设想一下，你在玩一个沙盒游戏的时候，当游戏内没有多少动物的时候，游戏很快就能跑完一次循环，比如它用了3毫秒，
 
 但是如果动物一下子多了起来，游戏跑起来就吃力了，这次它用了15毫秒，
 
@@ -107,12 +108,12 @@ int main()
 	ETHX_InitWindow("HelloEtherX", 800, 600);
 	bool isQuit = false;
 	
-	int nStartFrame, nCurrentFrame;
+	unsigned int nFrameStart, nFrameEnd;
 	ETHX_Point point = { 50,50 };
 
 	while (!isQuit)
 	{
-		nStartFrame = ETHX_GetInitTime();
+		nFrameStart = ETHX_GetInitTime();
 
 		ETHX_SetDrawColor({ 0,0,0,255 });
 		ETHX_ClearWindow();
@@ -120,10 +121,11 @@ int main()
 		ETHX_SetDrawColor({ 255,255,0,255 });
 		ETHX_DrawCircle(point, 30, true);
 
-		nCurrentFrame = ETHX_GetInitTime();
-		ETHX_Sleep(1000 / 60 - (nCurrentFrame - nStartFrame));
+		nFrameEnd = ETHX_GetInitTime();
+		if(nFrameEnd - nFrameStart < 1000 / 60)
+			ETHX_Sleep(1000 / 60 - (nFrameEnd - nFrameStart));
 
-        	ETHX_UpdateWindow();
+        ETHX_UpdateWindow();
 	}
 
 	ETHX_QuitWindow();
@@ -135,21 +137,25 @@ int main()
 
 循环里设置了两次绘制颜色，这是因为EtherX清空窗口的时候会用一次当前颜色(黑色)，我们绘制圆时要用到另一个颜色(黄色),
 
-`nStartFrame` 和 `nCurrentFrame` 变量便是我们用来控制帧率的变量,
+`nFrameStart` 和 `nFrameEnd` 变量便是我们用来控制帧率的变量,
 
-我们想要每一次循环用时都是1/60秒，从而控制帧数为60帧，
+我们想要每一次循环用时都是 1/60 秒，从而控制帧数为 60 帧，
 
 因为 `ETHX_Sleep` 的单位是毫秒，所以我们用 `1000 / 60` 算出每帧的时间，
 
-可以看到，在循环刚开始进行时，我们用函数 `ETHX_GetInitTime` 为 `nStartFrame` 变量赋了一次值，
+可以看到，在循环刚开始进行时，我们用函数 `ETHX_GetInitTime` 为 `nFrameStart` 变量赋了一次值，
 
-函数 `ETHX_GetInitTime` 用于获取从程序开始到现在的时间，
+函数 `ETHX_GetInitTime` 用于获取从程序开始到现在的时间，于是 `nFrameStart` 储存着循环开始的时间，
 
-然后我们在所有操作执行完后，又用该函数为 `nCurrentFrame` 变量赋了一次值，
+然后我们在所有操作执行完后，用 `nFrameEnd` 变量储存了当前的时间，
 
 这样我们便计算出了执行完所有操作后的用时，用 `1000 / 60` 减去这个用时就能得到我们应该延时的时间，
 
 接下来用 `ETHX_Sleep` 让程序睡眠指定时间，`帧率控制` 便做好了。
+
+注意到，只有在每次判断循环在单帧时间内完成后，才会进行延时操作，
+
+所以如果一次循环执行时间太长，游戏就会掉帧。
 
 # 让我们来处理事件吧
 
@@ -164,20 +170,19 @@ int main()
 
 int main()
 {
-	ETHX_InitWindow("test", 800, 600);
+	ETHX_InitWindow("HelloEtherX", 800, 600);
 	bool isQuit = false;
-	float nStartFrame, nCurrentFrame;
+	unsigned int nFrameStart, nFrameEnd;
 
 	ETHX_Event event;
 	ETHX_Point point = { 50,50 };
 
 	while (!isQuit)
 	{
-		nStartFrame = ETHX_GetInitTime();
+		nFrameStart = ETHX_GetInitTime();
 
 		ETHX_SetDrawColor({ 0,0,0,255 });
 		ETHX_ClearWindow();
-
 		ETHX_SetDrawColor({ 255,255,0,255 });
 		ETHX_DrawCircle(point, 30, true);
 
@@ -194,12 +199,13 @@ int main()
 			}
 		}
 
-		nCurrentFrame = ETHX_GetInitTime();
-		ETHX_Sleep(1000 / 60 - (nCurrentFrame - nStartFrame));
+		nFrameEnd = ETHX_GetInitTime();
+		if (nFrameEnd - nFrameStart < 1000 / 60)
+			ETHX_Sleep(1000 / 60 - (nFrameEnd - nFrameStart));
 
 		ETHX_UpdateWindow();
 	}
-	
+
 	ETHX_QuitWindow();
 	return 0;
 }
@@ -209,7 +215,9 @@ int main()
 
 然后再声明了一个 `ETHX_Point` ，用于更新圆形的绘制坐标。
 
-我们通过 `ETHX_UpdateEvent` 来获取事件，因为该函数能返回是否成功获取到事件的bool值，所以我们可以把它放在while循环里进行判断。
+我们通过 `ETHX_UpdateEvent` 来获取事件，因为该函数能返回是否成功获取到事件的bool值，
+
+所以我们可以把它放在while循环里进行判断。
 
 这时候当前事件就储存在了 `event` 中，`ETHX_Event` 的结构如下：
 
@@ -223,6 +231,10 @@ struct ETHX_Event
 	std::string text;
 };
 ```
+
+`ETHX_EventType` 是储存事件类型的枚举，
+
+`ETHX_KeyCode` 则是储存着按键类型的枚举，
 
 获取到事件后我们对事件的类型进行判断，
 
