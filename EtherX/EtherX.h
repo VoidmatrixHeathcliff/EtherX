@@ -439,7 +439,7 @@ void ETHX_InitWindow(const std::string& title, int width, int height, ETHX_Windo
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
 #else
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
-#endif	// !__WINDOWS__
+#endif	// __WINDOWS__
 
 	SDL_StartTextInput();
 }
