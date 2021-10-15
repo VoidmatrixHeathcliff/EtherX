@@ -34,7 +34,8 @@ EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ �
 
 ## 联系开发者
 
-请直接 [提交 issue](https://github.com/VoidmatrixHeathcliff/EtherX/issues) 或发送邮件至： Voidmatrix@qq.com
+请直接 [提交 issue](https://github.com/VoidmatrixHeathcliff/EtherX/issues) 或发送邮件至： Voidmatrix@qq.com  
+QQ 群讨论组：**679412727**，[直接加入](https://jq.qq.com/?_wv=1027&k=Gdl3BnsU)
 
 ## 赞助与支持
 
