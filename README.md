@@ -1,6 +1,32 @@
-# EtherX
-
-EtherX 是基于 SDL2 等开源项目实现的以教学场景为目标的 C++ 游戏开发工具库
+<div align="center">
+    <p align="center">
+        <img align="center" src="docs/image/logo.png" alt="logo" width="200">
+    </p>
+    <h1 align="center">EtherX</h1>
+    <p align="center">基于 SDL2 等开源项目实现的以教学场景为目标的 C++ 游戏开发工具库</p>
+    <p align="center">
+        <a href="https://github.com/VoidmatrixHeathcliff/EtherX/stargazers">
+            <img src="https://img.shields.io/github/stars/VoidmatrixHeathcliff/EtherX.svg?style=flat&labelColor=e49e61">
+        </a>
+        <a href="https://github.com/VoidmatrixHeathcliff/EtherX/network/members">
+            <img src="https://img.shields.io/github/forks/VoidmatrixHeathcliff/EtherX.svg?&color=green&style=flat-square">
+        </a>
+        <a href="https://jq.qq.com/?_wv=1027&k=Gdl3BnsU" target="_blank">
+            <img src="https://img.shields.io/static/v1?label=chatting&message=QQ&color=blue&style=flat-square">
+        </a>
+        <a href="https://github.com/VoidmatrixHeathcliff/EtherX/graphs/contributors" target="_blank">
+            <img src="https://img.shields.io/github/contributors/VoidmatrixHeathcliff/EtherX">
+        </a>
+        <a href="https://github.com/VoidmatrixHeathcliff/EtherX/issuese" target="_blank">
+            <img src="https://img.shields.io/static/v1?label=feedback&message=Issues&color=pink&style=flat-square">
+        </a>
+        <a href="https://github.com/VoidmatrixHeathcliff/EtherX/blob/main/LICENSE" target="_blank">
+            <img src="https://img.shields.io/github/license/VoidmatrixHeathcliff/EtherX?style=flat-square">
+        </a>
+       <img src="https://img.shields.io/github/commit-activity/m/VoidmatrixHeathcliff/EtherX">
+    </p>
+    </br>
+</div>
 
 > 本项目命名灵感来自 EasyX，但由于 EasyX 至今尚未开源，且其过度依赖 Windows 编程模型，考虑到部分开发者的诉求，EtherX 希望在一定程度上成为 EasyX 的替代解决方案。需要注意的是，虽然命名十分相像，但本项目与 [EtherEngineX](https://github.com/EtherProject/EtherEngineX) 或 [EtherEngine](https://github.com/EtherProject/EtherEngine) 均没有直接联系！ 
 
