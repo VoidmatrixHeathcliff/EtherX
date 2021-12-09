@@ -5,7 +5,7 @@
 * 
 * EtherX - 基于 SDL2 的 EasyX 开源跨平台全套解决方案
 * 
-* Version:	202110.0.1
+* Version:	202112.0.1
 * Author:	Voidmatrix
 * Email:	Voidmatrix@qq.com
 * Document:	https://github.com/VoidmatrixHeathcliff/EtherX
@@ -97,6 +97,13 @@ enum ETHX_EventType
 
 	// Other Event
 	ETHX_ET_QUIT = 256,
+};
+
+enum ETHX_ButtonID
+{
+	ETHX_BI_LEFT = 1,
+	ETHX_BI_MIDDLE = 2,
+	ETHX_BI_RIGHT = 3,
 };
 
 enum ETHX_KeyCode
@@ -293,6 +300,7 @@ struct ETHX_Event
 	int				mouse_pos_x, mouse_pos_y;
 	int				mouse_scroll_x, mouse_scroll_y;
 	std::string		text;
+	ETHX_ButtonID	button_id;
 };
 
 // Window API
@@ -999,6 +1007,14 @@ bool ETHX_UpdateEvent(ETHX_Event& event)
 		event.type = ETHX_ET_MOUSEMOTION;
 		event.mouse_pos_x = _event.motion.x;
 		event.mouse_pos_y = _event.motion.y;
+		break;
+	case SDL_MOUSEBUTTONDOWN:
+		event.type = ETHX_ET_MOUSEDOWN;
+		event.button_id = (ETHX_ButtonID)_event.button.button;
+		break;
+	case SDL_MOUSEBUTTONUP:
+		event.type = ETHX_ET_MOUSEUP;
+		event.button_id = (ETHX_ButtonID)_event.button.button;
 		break;
 	case SDL_MOUSEWHEEL:
 		event.type = ETHX_ET_MOUSESCROLL;
